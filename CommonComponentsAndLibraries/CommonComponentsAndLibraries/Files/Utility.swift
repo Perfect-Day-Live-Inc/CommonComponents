@@ -484,12 +484,12 @@ class Utility{
     ///unauthenticate user
     func unAuthenticatedLoggedOut(){
         
-        DispatchQueue.main.async {
-            if let viewCont = UIApplication.shared.keyWindow?.rootViewController{
+//        DispatchQueue.main.async {
+//            if let viewCont = UIApplication.shared.keyWindow?.rootViewController{
 //                Loader.getInstance().hideLoader(inView: viewCont.view)
 //                AlertViewController.showAlertView(textToShow: MessagesConstants.unAuthenticatedError, mainColor: Theme.appMainColor, secondaryColor: Theme.appGreySecondaryColor, fromVC: viewCont, isOkDelegate: true)
-            }
-        }
+//            }
+//        }
     }
     
     ///show custom alert view, it first check root view and show alert on it, if no root then on fromVC param
