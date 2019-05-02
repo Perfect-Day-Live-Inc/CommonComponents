@@ -16,15 +16,15 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "CommonComponents"
-  s.version      = "0.0.1"
-  s.summary      = "A short description of CommonComponentsAndLibraries."
+  s.version      = "0.0.2"
+  s.summary      = "A short description of CommonComponentsAndLibraries. and i will use these file for my new projects."
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
   #   * Try to keep it short, snappy and to the point.
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
-  s.description  = "My cool library which i will use to different projects."
+  s.description  = "My cool library which i will use to different projects. A short description of CommonComponentsAndLibraries. A short description of CommonComponentsAndLibraries. A short description of CommonComponentsAndLibraries. A short description of CommonComponentsAndLibraries. "
 
   s.homepage     = "https://gitlab.com/ahmedcs1/common-components-and-libraries"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
@@ -50,7 +50,7 @@ Pod::Spec.new do |s|
   #  profile URL.
   #
   s.swift_version = '4.2'
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '11.0'
   s.author             = { "Muhammad Ahmed Baig" => "ahmedcs@live.com" }
   # Or just: s.author    = "Muhammad Ahmed Baig"
   # s.authors            = { "Muhammad Ahmed Baig" => "ahmed.baig@appiskey.com" }
@@ -89,7 +89,7 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "CommonComponentsAndLibraries/CommonComponentsAndLibraries/**/*.{swift}"
+  s.source_files  = "CommonComponentsAndLibraries/CommonComponentsAndLibraries/**/*.*"
   s.exclude_files = "Classes/Exclude"
 
   # s.public_header_files = "Classes/**/*.h"
