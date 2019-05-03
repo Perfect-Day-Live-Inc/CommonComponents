@@ -21,6 +21,8 @@
 		778911EA227A1A3300551FB4 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778911DA227A1A3200551FB4 /* Utility.swift */; };
 		778911EC227A1A3300551FB4 /* ExtensionOfString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778911DC227A1A3200551FB4 /* ExtensionOfString.swift */; };
 		778911ED227A1A3300551FB4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778911DD227A1A3300551FB4 /* Constants.swift */; };
+		77FD855F227C413C006BB623 /* AlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77FD855D227C413C006BB623 /* AlertViewController.xib */; };
+		77FD8560227C413C006BB623 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FD855E227C413C006BB623 /* AlertViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,8 @@
 		778911DA227A1A3200551FB4 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		778911DC227A1A3200551FB4 /* ExtensionOfString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionOfString.swift; sourceTree = "<group>"; };
 		778911DD227A1A3300551FB4 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		77FD855D227C413C006BB623 /* AlertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlertViewController.xib; sourceTree = "<group>"; };
+		77FD855E227C413C006BB623 /* AlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +86,8 @@
 		778911CD227A19FE00551FB4 /* Files */ = {
 			isa = PBXGroup;
 			children = (
+				77FD855E227C413C006BB623 /* AlertViewController.swift */,
+				77FD855D227C413C006BB623 /* AlertViewController.xib */,
 				778911D3227A1A3200551FB4 /* Animations.swift */,
 				778911D8227A1A3200551FB4 /* ColorConstant.swift */,
 				778911DD227A1A3300551FB4 /* Constants.swift */,
@@ -168,6 +174,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77FD855F227C413C006BB623 /* AlertViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,6 +186,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				778911E6227A1A3300551FB4 /* Theme.swift in Sources */,
+				77FD8560227C413C006BB623 /* AlertViewController.swift in Sources */,
 				778911E2227A1A3300551FB4 /* ExtensionsOfVC.swift in Sources */,
 				778911E0227A1A3300551FB4 /* Formatter.swift in Sources */,
 				778911E4227A1A3300551FB4 /* MessagesConstants.swift in Sources */,
