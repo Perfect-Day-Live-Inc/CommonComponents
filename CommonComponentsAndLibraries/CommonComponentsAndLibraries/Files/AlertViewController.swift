@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol AlertVCDelegate : class {
+public protocol AlertVCDelegate : class {
     func noBtnTapped()
     func yesBtnTapped()
     func okBtnTapped()
@@ -20,7 +20,10 @@ public enum PopUpStyle {
     case doubleBtn
 }
 
+
+
 public struct AlertConfiguration{
+    
     public var message: String
     public var messageTxtColor: UIColor = UIColor.init(red: 104/255, green: 104/255, blue: 104/255, alpha: 1.0)
     public var popUpStyle: PopUpStyle
@@ -31,32 +34,21 @@ public struct AlertConfiguration{
     public var buttonTextColor: UIColor = UIColor.white
     public var backColor: UIColor = UIColor.white
     public var fontStyle: UIFont? = nil
+    public var primaryAction: (()->Void)? = nil
+    public var secondaryAction: (()->Void)? = nil
     
     public init(message: String,
-         popUpStyle: PopUpStyle,
-         primaryBtnTitle: String,
-         secondaryBtnTitle: String,
-         primaryColor: UIColor,
-         secondaryColor: UIColor) {
-        
-        self.message = message
-        self.popUpStyle = popUpStyle
-        self.primaryBtnTitle = primaryBtnTitle
-        self.secondaryBtnTitle = secondaryBtnTitle
-        self.primaryColor = primaryColor
-        self.secondaryColor = secondaryColor
-    }
-    
-    public init(message: String,
-         messageTxtColor: UIColor,
-         popUpStyle: PopUpStyle,
-         primaryBtnTitle: String,
-         secondaryBtnTitle: String,
-         primaryColor: UIColor,
-         secondaryColor: UIColor,
-         buttonTextColor: UIColor,
-         backColor: UIColor,
-         fontStyle: UIFont) {
+                messageTxtColor: UIColor=UIColor.init(red: 104/255, green: 104/255, blue: 104/255, alpha: 1.0),
+                popUpStyle: PopUpStyle,
+                primaryBtnTitle: String,
+                secondaryBtnTitle: String,
+                primaryColor: UIColor,
+                secondaryColor: UIColor,
+                buttonTextColor: UIColor=UIColor.white,
+                backColor: UIColor=UIColor.white,
+                fontStyle: UIFont?=nil,
+                primaryAction: (()->Void)?=nil,
+                secondaryAction: (()->Void)?=nil) {
         
         self.message = message
         self.messageTxtColor = messageTxtColor
@@ -68,6 +60,16 @@ public struct AlertConfiguration{
         self.buttonTextColor = buttonTextColor
         self.backColor = backColor
         self.fontStyle = fontStyle
+        self.primaryAction = primaryAction
+        self.secondaryAction = secondaryAction
+    }
+    
+    public mutating func settingPrimaryAction(action: @escaping ()->Void){
+        self.primaryAction = action
+    }
+    
+    public mutating func settingSecondaryAction(action: @escaping ()->Void){
+        self.secondaryAction = action
     }
 }
 
@@ -97,7 +99,7 @@ open class AlertViewController: UIViewController {
     
     private var typeOfPopUp : PopUpStyle = .doubleBtn
     
-    private var delegate : AlertVCDelegate? = nil
+    public var delegate : AlertVCDelegate? = nil
     
     public var config: AlertConfiguration!
     
@@ -153,19 +155,25 @@ open class AlertViewController: UIViewController {
     }
     
     @IBAction func yesBtnTapped(_ sender: UIButton) {
-        if delegate != nil{
+        if config.primaryAction != nil{
+            config.primaryAction!()
+        }else if delegate != nil{
             delegate!.yesBtnTapped()
         }
         self.dismiss(animated: true, completion: nil)
     }
     @IBAction func noBtnTapped(_ sender: UIButton) {
-        if delegate != nil{
+        if config.secondaryAction != nil{
+            config.secondaryAction!()
+        }else if delegate != nil{
             delegate!.noBtnTapped()
         }
         self.dismiss(animated: true, completion: nil)
     }
     @IBAction func okBtnTapped(_ sender: UIButton) {
-        if delegate != nil{
+        if config.primaryAction != nil{
+            config.primaryAction!()
+        }else if delegate != nil{
             delegate!.okBtnTapped()
         }
         self.dismiss(animated: true, completion: nil)
@@ -195,14 +203,18 @@ open class AlertViewController: UIViewController {
     }
     
     public func showAlert(){
-        self.providesPresentationContextTransitionStyle = true
-        self.definesPresentationContext = true
-        self.modalPresentationStyle=UIModalPresentationStyle.overCurrentContext
-        self.modalTransitionStyle = .crossDissolve
-        DispatchQueue.main.async {
-            if let rootWindow = UIApplication.shared.keyWindow?.rootViewController{
-                rootWindow.present(self, animated: true, completion: nil)
+        if self.config != nil{
+            self.providesPresentationContextTransitionStyle = true
+            self.definesPresentationContext = true
+            self.modalPresentationStyle=UIModalPresentationStyle.overCurrentContext
+            self.modalTransitionStyle = .crossDissolve
+            DispatchQueue.main.async {
+                if let rootWindow = UIApplication.shared.keyWindow?.rootViewController{
+                    rootWindow.present(self, animated: true, completion: nil)
+                }
             }
+        }else{
+            fatalError("You have to implement config first to show this alert.")
         }
     }
     /*
