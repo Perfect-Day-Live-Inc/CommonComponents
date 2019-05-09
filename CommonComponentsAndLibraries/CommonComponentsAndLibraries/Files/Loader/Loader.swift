@@ -132,26 +132,6 @@ open class Loader {
                     }
                 })
             }
-//            else{
-//                if let mainWindow = UIApplication.shared.keyWindow {
-//                    if mainWindow.subviews.contains(self.viewForActivity){
-//                        UIView.animate(withDuration: 1.0, animations: {
-//                            self.viewForActivity.alpha = 0.0
-//                            self.activityIndicatorView.alpha = 0.0
-//                            self.TxtLbl.alpha = 0.0
-//                        }, completion: { (status) in
-//                            if status {
-//                                self.activityIndicatorView.isHidden = true
-//                                self.viewForActivity.isHidden = true
-//                                self.TxtLbl.isHidden = true
-//                                self.TxtLbl.removeFromSuperview()
-//                                self.activityIndicatorView.removeFromSuperview()
-//                                self.viewForActivity.removeFromSuperview()
-//                            }
-//                        })
-//                    }
-//                }
-//            }
         }
     }
     

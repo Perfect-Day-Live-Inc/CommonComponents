@@ -42,6 +42,7 @@
 		779073F72284619F00104C07 /* PhoneNumberPickerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 779073EE2284619F00104C07 /* PhoneNumberPickerVC.xib */; };
 		779073F82284619F00104C07 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 779073EF2284619F00104C07 /* back.png */; };
 		779073F92284619F00104C07 /* PhoneNumberPickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779073F02284619F00104C07 /* PhoneNumberPickerVC.swift */; };
+		779073FC2284650200104C07 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 779073FB2284650200104C07 /* libc++.tbd */; };
 		77D5FEE4228311C800586F18 /* img@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77D5FED4228311C800586F18 /* img@2x.png */; };
 		77D5FEE5228311C800586F18 /* play@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77D5FED5228311C800586F18 /* play@3x.png */; };
 		77D5FEE6228311C800586F18 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D5FED6228311C800586F18 /* ImageManager.swift */; };
@@ -180,6 +181,7 @@
 		779073EE2284619F00104C07 /* PhoneNumberPickerVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhoneNumberPickerVC.xib; sourceTree = "<group>"; };
 		779073EF2284619F00104C07 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		779073F02284619F00104C07 /* PhoneNumberPickerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneNumberPickerVC.swift; sourceTree = "<group>"; };
+		779073FB2284650200104C07 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		77D5FED4228311C800586F18 /* img@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img@2x.png"; sourceTree = "<group>"; };
 		77D5FED5228311C800586F18 /* play@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play@3x.png"; sourceTree = "<group>"; };
 		77D5FED6228311C800586F18 /* ImageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				779073FC2284650200104C07 /* libc++.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,6 +299,7 @@
 			children = (
 				778911C4227A183E00551FB4 /* CommonComponentsAndLibraries */,
 				778911C3227A183E00551FB4 /* Products */,
+				779073FA2284650200104C07 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -483,6 +487,14 @@
 				779073ED2284619F00104C07 /* PhonePickerTVCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		779073FA2284650200104C07 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				779073FB2284650200104C07 /* libc++.tbd */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		77D5FED3228311C800586F18 /* ImageViewer */ = {
@@ -1031,6 +1043,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/CommonComponentsAndLibraries/Files/Loader/DGActivityIndicatorView/DGActivityIndicatorView.h\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.appiskey.CommonComponentsAndLibraries;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1057,6 +1070,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/CommonComponentsAndLibraries/Files/Loader/DGActivityIndicatorView/DGActivityIndicatorView.h\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.appiskey.CommonComponentsAndLibraries;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
