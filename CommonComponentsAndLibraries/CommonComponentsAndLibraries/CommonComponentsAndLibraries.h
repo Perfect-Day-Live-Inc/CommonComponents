@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DGActivityIndicatorView.h"
 
 //! Project version number for CommonComponentsAndLibraries.
 FOUNDATION_EXPORT double CommonComponentsAndLibrariesVersionNumber;

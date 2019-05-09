@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ViewerCVC" id="gTV-IL-0wX" customClass="ViewerCVC" customModule="CommonComponents" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="368" height="458"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="368" height="458"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bAl-9i-Qq3">
+                        <rect key="frame" x="0.0" y="0.0" width="368" height="458"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QM2-D9-KS8">
+                                <rect key="frame" x="0.0" y="0.0" width="368" height="458"/>
+                            </imageView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="QM2-D9-KS8" firstAttribute="top" secondItem="bAl-9i-Qq3" secondAttribute="top" id="Bg5-dA-NBV"/>
+                            <constraint firstItem="QM2-D9-KS8" firstAttribute="leading" secondItem="bAl-9i-Qq3" secondAttribute="leading" id="Lag-nk-VPS"/>
+                            <constraint firstAttribute="trailing" secondItem="QM2-D9-KS8" secondAttribute="trailing" id="VkI-1a-zRK"/>
+                            <constraint firstAttribute="bottom" secondItem="QM2-D9-KS8" secondAttribute="bottom" id="rpT-T1-B9V"/>
+                        </constraints>
+                        <connections>
+                            <outlet property="delegate" destination="-1" id="QCI-UY-evX"/>
+                        </connections>
+                    </scrollView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dnO-xw-drk">
+                        <rect key="frame" x="0.0" y="0.0" width="368" height="458"/>
+                        <state key="normal" image="play.png"/>
+                        <connections>
+                            <action selector="playBtnTapped:" destination="gTV-IL-0wX" eventType="touchUpInside" id="xHP-9j-I6T"/>
+                        </connections>
+                    </button>
+                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="rx7-3j-aye">
+                        <rect key="frame" x="165.5" y="210.5" width="37" height="37"/>
+                    </activityIndicatorView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error to download Image" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xum-uZ-9dg">
+                        <rect key="frame" x="40" y="220.5" width="288" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="rx7-3j-aye" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="4fT-Yo-dJx"/>
+                <constraint firstItem="dnO-xw-drk" firstAttribute="trailing" secondItem="bAl-9i-Qq3" secondAttribute="trailing" id="4jZ-k3-C3M"/>
+                <constraint firstItem="QM2-D9-KS8" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" id="Bpp-Ir-fBg"/>
+                <constraint firstItem="dnO-xw-drk" firstAttribute="bottom" secondItem="bAl-9i-Qq3" secondAttribute="bottom" id="DWY-yH-nst"/>
+                <constraint firstAttribute="trailing" secondItem="Xum-uZ-9dg" secondAttribute="trailing" constant="40" id="JsB-Ea-g3w"/>
+                <constraint firstItem="dnO-xw-drk" firstAttribute="top" secondItem="bAl-9i-Qq3" secondAttribute="top" id="L3M-Bc-BCT"/>
+                <constraint firstItem="Xum-uZ-9dg" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="MoK-qd-ZQg"/>
+                <constraint firstItem="Xum-uZ-9dg" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="PDj-Fp-APm"/>
+                <constraint firstItem="rx7-3j-aye" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="Swi-Fb-fQp"/>
+                <constraint firstItem="bAl-9i-Qq3" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="VDC-Te-lTf"/>
+                <constraint firstItem="QM2-D9-KS8" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" id="Vib-BP-YKT"/>
+                <constraint firstAttribute="bottom" secondItem="bAl-9i-Qq3" secondAttribute="bottom" id="WVa-sR-sgg"/>
+                <constraint firstItem="bAl-9i-Qq3" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="ag3-vH-xB4"/>
+                <constraint firstItem="dnO-xw-drk" firstAttribute="leading" secondItem="bAl-9i-Qq3" secondAttribute="leading" id="f5T-X2-GFi"/>
+                <constraint firstAttribute="trailing" secondItem="bAl-9i-Qq3" secondAttribute="trailing" id="k0m-qD-DVu"/>
+                <constraint firstItem="Xum-uZ-9dg" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="40" id="rga-jV-Q1P"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="368" height="458"/>
+            <connections>
+                <outlet property="errorLbl" destination="Xum-uZ-9dg" id="f7Q-9Z-YFi"/>
+                <outlet property="imgView" destination="QM2-D9-KS8" id="ziq-oK-KJt"/>
+                <outlet property="indicatorView" destination="rx7-3j-aye" id="RR7-RX-fs0"/>
+                <outlet property="playBtn" destination="dnO-xw-drk" id="wpq-Qx-woU"/>
+                <outlet property="scrollView" destination="bAl-9i-Qq3" id="kzV-Rs-jf1"/>
+            </connections>
+            <point key="canvasLocation" x="276" y="193"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="play.png" width="64" height="64"/>
+    </resources>
+</document>
