@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "CommonComponents"
-  s.version      = "0.0.8"
+  s.version      = "0.0.9"
   s.summary      = "A short description of CommonComponentsAndLibraries. and i will use these file for my new projects."
 
   # This description is used to generate tags and improve search results.
