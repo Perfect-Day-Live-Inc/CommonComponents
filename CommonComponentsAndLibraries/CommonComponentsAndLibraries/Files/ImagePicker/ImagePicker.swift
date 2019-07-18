@@ -415,26 +415,31 @@ extension ImagePicker : UIImagePickerControllerDelegate, UINavigationControllerD
             var image = ImagePickerModel()
             image.fileName = fileName
             image.fileType = .image
-            if let imageURL = info[.imageURL] as? URL{
-                fileName = imageURL.pathComponents.last!
-                if let asset = info[.phAsset] as? PHAsset{
-                    image.asset = asset
-                }else{
-//                    let assets = PHAsset.fetchAssets(withALAssetURLs: [imageURL], options: nil)
-//                    if let firstAsset = assets.firstObject{
-//                        image.asset = firstAsset
-//                    }else{
-//                        picker.dismiss(animated: true, completion: {
-//                            self.delegate!.PickerDidPicked(images: nil, downloadErrorString: "Image is not valid, please retake picture again")
-//                        })
-//                    }
+            
+            if #available(iOS 11.0, *) {
+                if let imageURL = info[.imageURL] as? URL{
+                    fileName = imageURL.pathComponents.last!
+                    if let asset = info[.phAsset] as? PHAsset{
+                        image.asset = asset
+                    }
                 }
+                
+                if let editedImage = info[.editedImage] as? UIImage{
+                    image.image = editedImage
+                }else {
+                    if let normalImage = info[.originalImage] as? UIImage{
+                        image.image = normalImage
+                    }
+                }
+            } else {
+                // Fallback on earlier versions
+//                info[.imageURL]
             }
             
-            if let editedImage = info[.editedImage] as? UIImage{
+            if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage{
                 image.image = editedImage
             }else {
-                if let normalImage = info[.originalImage] as? UIImage{
+                if let normalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
                     image.image = normalImage
                 }
             }

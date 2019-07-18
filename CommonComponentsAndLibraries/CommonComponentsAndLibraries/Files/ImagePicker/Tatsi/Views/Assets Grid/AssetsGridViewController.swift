@@ -305,7 +305,12 @@ final internal class AssetsGridViewController: UICollectionViewController, Picke
         super.viewDidLayoutSubviews()
         
         
-        self.emptyView?.layoutMargins = UIEdgeInsets(top: self.view.safeAreaInsets.top + 20, left: 20, bottom: self.view.safeAreaInsets.bottom + 20, right: 20)
+        if #available(iOS 11.0, *) {
+            self.emptyView?.layoutMargins = UIEdgeInsets(top: self.view.safeAreaInsets.top + 20, left: 20, bottom: self.view.safeAreaInsets.bottom + 20, right: 20)
+        } else {
+            // Fallback on earlier versions
+            self.emptyView?.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        }
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

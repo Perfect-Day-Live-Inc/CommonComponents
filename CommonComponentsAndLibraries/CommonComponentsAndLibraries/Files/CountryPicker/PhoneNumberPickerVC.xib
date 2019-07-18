@@ -10,12 +10,15 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhoneNumberPickerVC" customModule="CommonComponents" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhoneNumberPickerVC" customModule="CommonComponentsAndLibraries" customModuleProvider="target">
             <connections>
+                <outlet property="bgImageView" destination="wR5-ei-0nJ" id="4Zq-RP-3lK"/>
                 <outlet property="codeLbl" destination="SMa-xB-hcW" id="sML-9o-0dp"/>
                 <outlet property="numberField" destination="xWE-Zw-fVh" id="Weh-eU-Sr0"/>
                 <outlet property="searchBar" destination="V2X-DQ-I5G" id="RvV-ib-6x9"/>
+                <outlet property="seperatorView" destination="xTG-Tj-7IP" id="KVi-hH-gto"/>
                 <outlet property="tableView" destination="Twq-Wp-65Z" id="GpZ-s9-hS8"/>
+                <outlet property="topInputView" destination="mVG-ng-P7p" id="bSm-Pp-kva"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Utp-AO-Iod"/>
             </connections>
         </placeholder>
@@ -27,10 +30,13 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="023-nc-v1R">
                     <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                     <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wR5-ei-0nJ">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mVG-ng-P7p">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SMa-xB-hcW" customClass="SSHLabel" customModule="CommonComponents" customModuleProvider="target">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SMa-xB-hcW" customClass="SSHLabel" customModule="CommonComponentsAndLibraries" customModuleProvider="target">
                                     <rect key="frame" x="10" y="14.5" width="14" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="21" id="s6r-Rk-jGr"/>
@@ -97,12 +103,16 @@
                     <constraints>
                         <constraint firstItem="Twq-Wp-65Z" firstAttribute="top" secondItem="V2X-DQ-I5G" secondAttribute="bottom" id="5qb-O1-lHI"/>
                         <constraint firstAttribute="trailing" secondItem="V2X-DQ-I5G" secondAttribute="trailing" id="7Fo-Dg-fVH"/>
+                        <constraint firstItem="wR5-ei-0nJ" firstAttribute="top" secondItem="023-nc-v1R" secondAttribute="top" id="DqL-ea-iyY"/>
                         <constraint firstAttribute="bottom" secondItem="Twq-Wp-65Z" secondAttribute="bottom" id="MTg-9E-8tn"/>
                         <constraint firstAttribute="trailing" secondItem="Twq-Wp-65Z" secondAttribute="trailing" id="ZNE-Z0-7Fv"/>
                         <constraint firstItem="Twq-Wp-65Z" firstAttribute="leading" secondItem="023-nc-v1R" secondAttribute="leading" id="aU0-lR-ZhG"/>
                         <constraint firstItem="mVG-ng-P7p" firstAttribute="top" secondItem="023-nc-v1R" secondAttribute="top" id="dPO-cp-nn4"/>
+                        <constraint firstItem="wR5-ei-0nJ" firstAttribute="leading" secondItem="023-nc-v1R" secondAttribute="leading" id="fO3-q2-spq"/>
+                        <constraint firstAttribute="bottom" secondItem="wR5-ei-0nJ" secondAttribute="bottom" id="guM-ma-UIt"/>
                         <constraint firstItem="V2X-DQ-I5G" firstAttribute="top" secondItem="mVG-ng-P7p" secondAttribute="bottom" id="jzS-Yg-ZNa"/>
                         <constraint firstAttribute="trailing" secondItem="mVG-ng-P7p" secondAttribute="trailing" id="oEz-rt-eST"/>
+                        <constraint firstAttribute="trailing" secondItem="wR5-ei-0nJ" secondAttribute="trailing" id="sO0-wr-kAi"/>
                         <constraint firstItem="mVG-ng-P7p" firstAttribute="leading" secondItem="023-nc-v1R" secondAttribute="leading" id="uqc-ny-Tx5"/>
                         <constraint firstItem="V2X-DQ-I5G" firstAttribute="leading" secondItem="023-nc-v1R" secondAttribute="leading" id="vW1-K7-T5b"/>
                     </constraints>
@@ -116,6 +126,7 @@
                 <constraint firstItem="023-nc-v1R" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="zLq-E9-nZt"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="138.40000000000001" y="152.47376311844079"/>
         </view>
     </objects>
 </document>

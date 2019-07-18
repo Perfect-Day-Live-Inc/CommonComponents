@@ -26,6 +26,7 @@ public protocol PhoneNumberPickerVCDelegate {
 
 open class PhoneNumberPickerVC: UIViewController {
     
+    
     public init(){
         let bundle = Bundle.init(for: PhoneNumberPickerVC.self)
         print("All Bundles ", Bundle.allBundles)
@@ -48,6 +49,9 @@ open class PhoneNumberPickerVC: UIViewController {
     }
     
     
+    @IBOutlet weak var seperatorView: UIView!
+    @IBOutlet weak var bgImageView: UIImageView!
+    @IBOutlet weak var topInputView: UIView!
     @IBOutlet weak var codeBtn: UIButton!
     @IBOutlet weak var codeLbl: UILabel!
     @IBOutlet weak var numberField: UITextField!
@@ -60,7 +64,16 @@ open class PhoneNumberPickerVC: UIViewController {
     
     public var countryModel : IsoCountryInfo?
     public var selectedNumber = ""
-    public var limitOfNumberExcludingDailingCode = 7
+    public var maximumExcludingDailingCode = 7
+    public var minmumDigitsRequired = 5
+    public var backBarItemImage: UIImage!
+    public var rightBarItemImage: UIImage? = nil
+    public var backgroundImage: UIImage? = nil
+    public var isTransparentNavigation: Bool = false
+    public var navigationBarItemColor: UIColor = .black
+    public var textColors: UIColor = .black
+    public var navigationFont: UIFont = UIFont.systemFont(ofSize: 17)
+    
     var isPresented : Bool = true
     var isNavigationHiddenInParent : Bool = true
     
@@ -73,7 +86,11 @@ open class PhoneNumberPickerVC: UIViewController {
         self.tableView.register(UINib(nibName: "PhonePickerTVCell", bundle: bundle), forCellReuseIdentifier: "PhonePickerTVCell")
         
         if self.navigationController == nil{
-            fatalError("Expected a navigation controller, you need to add this controller in navigation controller or call 'setUpPhonePicker' or 'presentPicker'")
+            fatalError("Expected a navigation controller, you need to add this controller inside a navigation controller or call 'setUpPhonePicker' or 'presentPicker'")
+        }
+        
+        if self.backBarItemImage == nil{
+            backBarItemImage = UIImage.init(named: "back", in: Bundle.init(for: PhoneNumberPickerVC.self), compatibleWith: UITraitCollection.init())
         }
         
         self.setUpNavigation()
@@ -90,32 +107,20 @@ open class PhoneNumberPickerVC: UIViewController {
         self.numberField.delegate = self
         self.tableView.tableFooterView = UIView()
         self.tableView.reloadData()
+        
+        if backgroundImage != nil{
+            self.bgImageView.image = backgroundImage
+            self.topInputView.backgroundColor = .clear
+            self.codeLbl.textColor = textColors
+            self.numberField.textColor = textColors
+            self.searchBar.backgroundColor = .clear
+            self.searchBar.tintColor = textColors
+            self.tableView.backgroundColor = .clear
+            self.seperatorView.backgroundColor = textColors
+        }
+        
         self.setData()
     }
-    
-    func setUpNavigation(){
-        if self.navigationController?.isNavigationBarHidden ?? false{
-            self.isNavigationHiddenInParent = true
-        }else{
-            self.isNavigationHiddenInParent = false
-        }
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
-        
-        self.navigationItem.title = "Contact Number"
-        let titleDict: NSDictionary = [NSAttributedString.Key.foregroundColor : UIColor.black,
-                                       NSAttributedString.Key.font : UIFont.systemFont(ofSize: 17)]
-        self.navigationController?.navigationBar.titleTextAttributes = titleDict as? [NSAttributedString.Key : Any]
-        
-        let doneBtn = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneBtnTapped))
-        doneBtn.setTitleTextAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 17),
-                                        NSAttributedString.Key.foregroundColor: UIColor.black], for: .normal)
-        self.navigationItem.rightBarButtonItem = doneBtn
-        
-        self.navigationItem.leftBarButtonItem = self.backBarButtonItem()
-        self.navigationItem.leftBarButtonItem?.tintColor = UIColor.black
-    }
-    
-    
 
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -146,12 +151,46 @@ open class PhoneNumberPickerVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func setUpNavigation(){
+        if self.navigationController?.isNavigationBarHidden ?? false{
+            self.isNavigationHiddenInParent = true
+        }else{
+            self.isNavigationHiddenInParent = false
+        }
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        
+        self.navigationItem.title = "Contact Number"
+        let titleDict: NSDictionary = [NSAttributedString.Key.foregroundColor : self.navigationBarItemColor,
+                                       NSAttributedString.Key.font : navigationFont]
+        self.navigationController?.navigationBar.titleTextAttributes = titleDict as? [NSAttributedString.Key : Any]
+        
+        
+        if rightBarItemImage == nil{
+            let doneBtn = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneBtnTapped))
+            doneBtn.setTitleTextAttributes([NSAttributedString.Key.font : navigationFont,
+                                            NSAttributedString.Key.foregroundColor: self.navigationBarItemColor], for: .normal)
+            self.navigationItem.rightBarButtonItem = doneBtn
+        }else{
+            let doneBtn = UIBarButtonItem.init(image: self.rightBarItemImage!, style: .done, target: self, action: #selector(doneBtnTapped))
+            self.navigationItem.rightBarButtonItem = doneBtn
+        }
+        
+        self.navigationItem.leftBarButtonItem = self.backBarButtonItem()
+        self.navigationItem.leftBarButtonItem?.tintColor = self.navigationBarItemColor
+        
+        if isTransparentNavigation{
+            self.navigationController?.navigationBar.barTintColor = UIColor.clear//color
+            self.navigationController?.navigationBar.backgroundColor = UIColor.clear//.getDarkBlueColor//color
+            self.navigationController?.navigationBar.isTranslucent = true
+            self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+            self.navigationController?.navigationBar.shadowImage = UIImage()
+        }
+    }
+    
     
     ///return back bar button which are using in whole app
     func backBarButtonItem() -> UIBarButtonItem {
-        let backImage = UIImage.init(named: "back", in: Bundle.init(for: PhoneNumberPickerVC.self), compatibleWith: UITraitCollection.init())
-        
-        let backButtonItem = UIBarButtonItem(image: backImage, style: .plain, target: self, action: #selector(backButtonTapped))
+        let backButtonItem = UIBarButtonItem(image: backBarItemImage, style: .plain, target: self, action: #selector(backButtonTapped))
         backButtonItem.tintColor = .black
         return backButtonItem
     }
@@ -165,23 +204,79 @@ open class PhoneNumberPickerVC: UIViewController {
         }
     }
     
-    @IBAction func codeBtnTapped(_ sender: UIButton) {
-        self.searchBar.becomeFirstResponder()
+    func isValidPhoneNumber(number: String) -> Bool{
+        do {
+            let detector = try NSDataDetector(types: NSTextCheckingResult.CheckingType.phoneNumber.rawValue)
+            let matches = detector.matches(in: number, options: [], range: NSMakeRange(0, number.count))
+            if let res = matches.first {
+                return res.resultType == .phoneNumber && res.range.location == 0 && res.range.length == number.count
+            } else {
+                return false
+            }
+        } catch {
+            return false
+        }
     }
     
     public func setUpPhonePicker(countryModel : IsoCountryInfo?=nil,
                                  selectedNumber : String="",
-                                 limitOfNumberExcludingDailingCode: Int){
-        self.countryModel = countryModel
-        self.selectedNumber = selectedNumber
-        self.limitOfNumberExcludingDailingCode = limitOfNumberExcludingDailingCode
+                                 maximumExcludingDailingCode: Int,
+                                 minmumDigitsRequired: Int,
+                                 backBarItemImage: UIImage?=nil,
+                                 backgroundImage: UIImage? = nil,
+                                 isTransparentNavigation: Bool? = nil,
+                                 navigationBarItemColor: UIColor? = nil,
+                                 textColors: UIColor? = nil){
+        
+        self.maximumExcludingDailingCode = maximumExcludingDailingCode
+        self.minmumDigitsRequired = minmumDigitsRequired
+        
+        if countryModel != nil{
+            self.countryModel = countryModel!
+        }
+        if selectedNumber != ""{
+            self.selectedNumber = selectedNumber
+        }
+        if textColors != nil{
+            self.textColors = textColors!
+        }
+        if navigationBarItemColor != nil{
+            self.navigationBarItemColor = navigationBarItemColor!
+        }
+        if isTransparentNavigation != nil{
+            self.isTransparentNavigation = isTransparentNavigation!
+        }
+        if backgroundImage != nil{
+            self.backgroundImage = backgroundImage!
+        }
+        if backBarItemImage != nil{
+            self.backBarItemImage = backBarItemImage!
+        }
     }
     
     public func presentPicker(fromViewController vc: UIViewController){
         let navVC = UINavigationController.init(rootViewController: self)
         vc.present(navVC, animated: true, completion: nil)
     }
-
+    
+    func showAlert(withMsg message: String){
+        let alert = UIAlertController.init(title: "Alert",
+                                           message: message,
+                                           preferredStyle: UIAlertController.Style.alert)
+        
+        alert.addAction(UIAlertAction.init(title: "Ok",
+                                           style: UIAlertAction.Style.cancel,
+                                           handler: nil))
+        DispatchQueue.main.async {
+            self.present(alert,
+                         animated: true,
+                         completion: nil)
+        }
+    }
+    
+    @IBAction func codeBtnTapped(_ sender: UIButton) {
+        self.searchBar.becomeFirstResponder()
+    }
 }
 extension PhoneNumberPickerVC : UITableViewDelegate, UITableViewDataSource{
     private func numberOfSections(in tableView: UITableView) -> Int {
@@ -202,6 +297,11 @@ extension PhoneNumberPickerVC : UITableViewDelegate, UITableViewDataSource{
             }else{
                 cell.tickWidth.constant = 0
             }
+        }
+        if self.backgroundImage != nil{
+            cell.contentView.backgroundColor = .clear
+            cell.countryNameLbl.textColor = textColors
+            cell.countryCodeLbl.textColor = textColors
         }
         return cell
     }
@@ -227,24 +327,28 @@ extension PhoneNumberPickerVC : UITableViewDelegate, UITableViewDataSource{
     
     ///this will check if number is not empty then call delegate method
     @objc func doneBtnTapped(){
-        if numberField.text != "" && numberField.text!.count >= self.limitOfNumberExcludingDailingCode{
-            if delegate != nil{
-                delegate!.phoneNumberPicker(number: self.codeLbl.text! + "" + self.numberField.text!,
-                                            isoModel: self.countryModel!)
-                if self.isPresented{
-                    self.dismiss(animated: true, completion: nil)
-                }else{
-                    self.navigationController?.popViewController(animated: true)
+        if numberField.text != "", numberField.text!.count >= self.minmumDigitsRequired, numberField.text!.count <= self.maximumExcludingDailingCode{
+            if self.isValidPhoneNumber(number: self.codeLbl.text! + "" + self.numberField.text!){
+                if delegate != nil{
+                    delegate!.phoneNumberPicker(number: self.codeLbl.text! + "" + self.numberField.text!,
+                                                isoModel: self.countryModel!)
+                    if self.isPresented{
+                        self.dismiss(animated: true, completion: nil)
+                    }else{
+                        self.navigationController?.popViewController(animated: true)
+                    }
                 }
+            }else{
+                self.showAlert(withMsg: "Please enter valid number.")
             }
         }else{
-            let alert = UIAlertController.init(title: "Alert", message: "Number cannot be greater then \(self.limitOfNumberExcludingDailingCode)", preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(UIAlertAction.init(title: "Ok",
-                                               style: UIAlertAction.Style.cancel,
-                                               handler: nil))
-            DispatchQueue.main.async {
-                self.present(alert, animated: true, completion: nil)
+            var errorToShow = "Number cannot be empty."
+            if numberField.text != "", numberField.text!.count < self.minmumDigitsRequired{
+                errorToShow = "Number cannot be less then \(self.minmumDigitsRequired)."
+            }else if numberField.text != "", numberField.text!.count > self.maximumExcludingDailingCode{
+                errorToShow = "Number cannot be greater then \(self.maximumExcludingDailingCode)."
             }
+            self.showAlert(withMsg: errorToShow)
         }
     }
 }
@@ -259,7 +363,7 @@ extension PhoneNumberPickerVC: UISearchBarDelegate, UITextFieldDelegate{
         if searchBar.text != ""{
             isSearchEnable = true
             arrayToShow = ISOCountries.allCountries.filter({ (model) -> Bool in
-                return model.name.contains(searchBar.text!)
+                return model.name.lowercased().contains(searchBar.text!.lowercased())
             })
         }else{
             isSearchEnable = false
@@ -281,7 +385,7 @@ extension PhoneNumberPickerVC: UISearchBarDelegate, UITextFieldDelegate{
         if searchText != ""{
             isSearchEnable = true
             arrayToShow = ISOCountries.allCountries.filter({ (model) -> Bool in
-                return model.name.contains(searchBar.text!)
+                return model.name.lowercased().contains(searchBar.text!.lowercased())
             })
         }else{
             isSearchEnable = false
@@ -303,7 +407,7 @@ extension PhoneNumberPickerVC: UISearchBarDelegate, UITextFieldDelegate{
         let  char = string.cString(using: String.Encoding.utf8)!
         let isBackSpace = strcmp(char, "\\b")
         
-        if (textField.text!.count + (string.count - range.length) > self.limitOfNumberExcludingDailingCode) && isBackSpace != -92{
+        if (textField.text!.count + (string.count - range.length) > self.maximumExcludingDailingCode) && isBackSpace != -92{
             return false
         }
         return true
@@ -316,3 +420,5 @@ extension PhoneNumberPickerVC: UISearchBarDelegate, UITextFieldDelegate{
     //------------------------------------------------------------------------------------------------------//
     //------------------------------------------------------------------------------------------------------//
 }
+
+

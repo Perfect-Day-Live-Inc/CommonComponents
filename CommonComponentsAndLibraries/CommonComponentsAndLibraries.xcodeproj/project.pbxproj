@@ -58,6 +58,11 @@
 		77D5FEF0228311C800586F18 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 77D5FEE1228311C800586F18 /* play.png */; };
 		77D5FEF1228311C800586F18 /* thumb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 77D5FEE2228311C800586F18 /* thumb.jpg */; };
 		77D5FEF2228311C800586F18 /* TappableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D5FEE3228311C800586F18 /* TappableImageView.swift */; };
+		77FA15DA22DDFD1600B0D54A /* AlertSheetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77FA15D522DDFD1600B0D54A /* AlertSheetCell.xib */; };
+		77FA15DB22DDFD1600B0D54A /* AlertSheetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FA15D622DDFD1600B0D54A /* AlertSheetCell.swift */; };
+		77FA15DC22DDFD1600B0D54A /* AlertSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FA15D722DDFD1600B0D54A /* AlertSheet.swift */; };
+		77FA15DD22DDFD1600B0D54A /* AlertSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77FA15D822DDFD1600B0D54A /* AlertSheet.xib */; };
+		77FA15DE22DDFD1600B0D54A /* SheetAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FA15D922DDFD1600B0D54A /* SheetAction.swift */; };
 		77FA6B942280528600522DAE /* DGActivityIndicatorView.h in Headers */ = {isa = PBXBuildFile; fileRef = 77FA6B4B2280528500522DAE /* DGActivityIndicatorView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		77FA6B952280528600522DAE /* DGActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FA6B4C2280528500522DAE /* DGActivityIndicatorView.m */; };
 		77FA6B962280528600522DAE /* DGActivityIndicatorAnimationProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 77FA6B4D2280528500522DAE /* DGActivityIndicatorAnimationProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -131,11 +136,6 @@
 		77FA6BDA2280528600522DAE /* DGActivityIndicatorThreeDotsAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 77FA6B922280528600522DAE /* DGActivityIndicatorThreeDotsAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		77FA6BDB2280528600522DAE /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FA6B932280528600522DAE /* Loader.swift */; };
 		77FA6BDD2280534C00522DAE /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FA6BDC2280534C00522DAE /* ToastView.swift */; };
-		77FA6BE82280537C00522DAE /* AlertSheetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77FA6BE32280537C00522DAE /* AlertSheetCell.xib */; };
-		77FA6BE92280537C00522DAE /* AlertSheetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FA6BE42280537C00522DAE /* AlertSheetCell.swift */; };
-		77FA6BEA2280537C00522DAE /* AlertSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FA6BE52280537C00522DAE /* AlertSheet.swift */; };
-		77FA6BEB2280537C00522DAE /* AlertSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77FA6BE62280537C00522DAE /* AlertSheet.xib */; };
-		77FA6BEC2280537C00522DAE /* SheetAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FA6BE72280537C00522DAE /* SheetAction.swift */; };
 		77FA6BF5228078B300522DAE /* PullToRefresherView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77FA6BF3228078B300522DAE /* PullToRefresherView.xib */; };
 		77FA6BF6228078B300522DAE /* PullToRefresherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FA6BF4228078B300522DAE /* PullToRefresherView.swift */; };
 		77FA6BFA22807EB600522DAE /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FA6BF922807EB600522DAE /* ProgressBarView.swift */; };
@@ -197,6 +197,11 @@
 		77D5FEE1228311C800586F18 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
 		77D5FEE2228311C800586F18 /* thumb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = thumb.jpg; sourceTree = "<group>"; };
 		77D5FEE3228311C800586F18 /* TappableImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TappableImageView.swift; sourceTree = "<group>"; };
+		77FA15D522DDFD1600B0D54A /* AlertSheetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlertSheetCell.xib; sourceTree = "<group>"; };
+		77FA15D622DDFD1600B0D54A /* AlertSheetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertSheetCell.swift; sourceTree = "<group>"; };
+		77FA15D722DDFD1600B0D54A /* AlertSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertSheet.swift; sourceTree = "<group>"; };
+		77FA15D822DDFD1600B0D54A /* AlertSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlertSheet.xib; sourceTree = "<group>"; };
+		77FA15D922DDFD1600B0D54A /* SheetAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetAction.swift; sourceTree = "<group>"; };
 		77FA6B4B2280528500522DAE /* DGActivityIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DGActivityIndicatorView.h; sourceTree = "<group>"; };
 		77FA6B4C2280528500522DAE /* DGActivityIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DGActivityIndicatorView.m; sourceTree = "<group>"; };
 		77FA6B4D2280528500522DAE /* DGActivityIndicatorAnimationProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DGActivityIndicatorAnimationProtocol.h; sourceTree = "<group>"; };
@@ -270,11 +275,6 @@
 		77FA6B922280528600522DAE /* DGActivityIndicatorThreeDotsAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DGActivityIndicatorThreeDotsAnimation.h; sourceTree = "<group>"; };
 		77FA6B932280528600522DAE /* Loader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
 		77FA6BDC2280534C00522DAE /* ToastView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
-		77FA6BE32280537C00522DAE /* AlertSheetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlertSheetCell.xib; sourceTree = "<group>"; };
-		77FA6BE42280537C00522DAE /* AlertSheetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertSheetCell.swift; sourceTree = "<group>"; };
-		77FA6BE52280537C00522DAE /* AlertSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertSheet.swift; sourceTree = "<group>"; };
-		77FA6BE62280537C00522DAE /* AlertSheet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlertSheet.xib; sourceTree = "<group>"; };
-		77FA6BE72280537C00522DAE /* SheetAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetAction.swift; sourceTree = "<group>"; };
 		77FA6BF3228078B300522DAE /* PullToRefresherView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PullToRefresherView.xib; sourceTree = "<group>"; };
 		77FA6BF4228078B300522DAE /* PullToRefresherView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullToRefresherView.swift; sourceTree = "<group>"; };
 		77FA6BF922807EB600522DAE /* ProgressBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
@@ -324,9 +324,9 @@
 		778911CD227A19FE00551FB4 /* Files */ = {
 			isa = PBXGroup;
 			children = (
+				77FA15D322DDFD1600B0D54A /* AlertSheet */,
 				7790736722842A9B00104C07 /* NullDataView */,
 				77FA6BFB22807EB900522DAE /* ProgressBarView */,
-				77FA6BE12280537C00522DAE /* AlertSheet */,
 				77FA6BDF2280535D00522DAE /* ToastView */,
 				77FA6BDE2280535000522DAE /* AlertViewController */,
 				77FA6B492280528500522DAE /* Loader */,
@@ -535,6 +535,26 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
+		77FA15D322DDFD1600B0D54A /* AlertSheet */ = {
+			isa = PBXGroup;
+			children = (
+				77FA15D422DDFD1600B0D54A /* Cell */,
+				77FA15D722DDFD1600B0D54A /* AlertSheet.swift */,
+				77FA15D822DDFD1600B0D54A /* AlertSheet.xib */,
+				77FA15D922DDFD1600B0D54A /* SheetAction.swift */,
+			);
+			path = AlertSheet;
+			sourceTree = "<group>";
+		};
+		77FA15D422DDFD1600B0D54A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				77FA15D522DDFD1600B0D54A /* AlertSheetCell.xib */,
+				77FA15D622DDFD1600B0D54A /* AlertSheetCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		77FA6B492280528500522DAE /* Loader */ = {
 			isa = PBXGroup;
 			children = (
@@ -645,27 +665,6 @@
 				77FA6BDC2280534C00522DAE /* ToastView.swift */,
 			);
 			path = ToastView;
-			sourceTree = "<group>";
-		};
-		77FA6BE12280537C00522DAE /* AlertSheet */ = {
-			isa = PBXGroup;
-			children = (
-				77FA6BE22280537C00522DAE /* Cell */,
-				77FA6BE52280537C00522DAE /* AlertSheet.swift */,
-				77FA6BE62280537C00522DAE /* AlertSheet.xib */,
-				77FA6BE72280537C00522DAE /* SheetAction.swift */,
-			);
-			name = AlertSheet;
-			path = ../../../../test/Pods/CommonComponents/AlertSheet;
-			sourceTree = "<group>";
-		};
-		77FA6BE22280537C00522DAE /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				77FA6BE32280537C00522DAE /* AlertSheetCell.xib */,
-				77FA6BE42280537C00522DAE /* AlertSheetCell.swift */,
-			);
-			path = Cell;
 			sourceTree = "<group>";
 		};
 		77FA6BF2228078B300522DAE /* PullToRefresherView */ = {
@@ -794,14 +793,14 @@
 				77D5FEF0228311C800586F18 /* play.png in Resources */,
 				77D5FEE7228311C800586F18 /* play@2x.png in Resources */,
 				77D5FEE8228311C800586F18 /* img@3x.png in Resources */,
-				77FA6BE82280537C00522DAE /* AlertSheetCell.xib in Resources */,
+				77FA15DA22DDFD1600B0D54A /* AlertSheetCell.xib in Resources */,
 				77FA6BF5228078B300522DAE /* PullToRefresherView.xib in Resources */,
 				77D5FEE4228311C800586F18 /* img@2x.png in Resources */,
-				77FA6BEB2280537C00522DAE /* AlertSheet.xib in Resources */,
 				779073F32284619F00104C07 /* back@3x.png in Resources */,
 				77D5FEED228311C800586F18 /* Cross@3x.png in Resources */,
 				779073F72284619F00104C07 /* PhoneNumberPickerVC.xib in Resources */,
 				779073F82284619F00104C07 /* back.png in Resources */,
+				77FA15DD22DDFD1600B0D54A /* AlertSheet.xib in Resources */,
 				779073F12284619F00104C07 /* back@2x.png in Resources */,
 				77D5FEEC228311C800586F18 /* share.png in Resources */,
 				77D5FEEA228311C800586F18 /* ViewerCVC.xib in Resources */,
@@ -829,9 +828,9 @@
 				779073D022845CAF00104C07 /* PHAssetCollectionExtensions.swift in Sources */,
 				7790736922842AAC00104C07 /* NullDataView.swift in Sources */,
 				77FA6B992280528600522DAE /* DGActivityIndicatorTripleRingsAnimation.m in Sources */,
-				77FA6BEA2280537C00522DAE /* AlertSheet.swift in Sources */,
 				77FA6BA32280528600522DAE /* DGActivityIndicatorTriplePulseAnimation.m in Sources */,
 				77FD8560227C413C006BB623 /* AlertViewController.swift in Sources */,
+				77FA15DE22DDFD1600B0D54A /* SheetAction.swift in Sources */,
 				779073D622845CAF00104C07 /* AuthorizationViewController.swift in Sources */,
 				77FA6BB92280528600522DAE /* DGActivityIndicatorLineScaleAnimation.m in Sources */,
 				77FA6BA92280528600522DAE /* DGActivityIndicatorRotatingSquaresAnimation.m in Sources */,
@@ -840,7 +839,6 @@
 				779073D822845CAF00104C07 /* AlbumsViewController.swift in Sources */,
 				77FA6BDB2280528600522DAE /* Loader.swift in Sources */,
 				779073E322845CAF00104C07 /* AlbumsTableHeaderView.swift in Sources */,
-				77FA6BE92280537C00522DAE /* AlertSheetCell.swift in Sources */,
 				77D5FEF2228311C800586F18 /* TappableImageView.swift in Sources */,
 				779073F92284619F00104C07 /* PhoneNumberPickerVC.swift in Sources */,
 				77FA6BC82280528600522DAE /* DGActivityIndicatorBallScaleRippleMultipleAnimation.m in Sources */,
@@ -859,6 +857,7 @@
 				77FA6BF6228078B300522DAE /* PullToRefresherView.swift in Sources */,
 				77FA6BA02280528600522DAE /* DGActivityIndicatorBallGridPulseAnimation.m in Sources */,
 				77FA6BC52280528600522DAE /* DGActivityIndicatorBallScaleAnimation.m in Sources */,
+				77FA15DB22DDFD1600B0D54A /* AlertSheetCell.swift in Sources */,
 				77FA6BCA2280528600522DAE /* DGActivityIndicatorTwoDotsAnimation.m in Sources */,
 				77FA6BD32280528600522DAE /* DGActivityIndicatorRotatingTrigonAnimation.m in Sources */,
 				77FA6BCD2280528600522DAE /* DGActivityIndicatorBallSpinFadeLoader.m in Sources */,
@@ -879,7 +878,6 @@
 				779073CF22845CAF00104C07 /* CGSizeExtensions.swift in Sources */,
 				77FA6BDD2280534C00522DAE /* ToastView.swift in Sources */,
 				779073F62284619F00104C07 /* PhonePickerTVCell.swift in Sources */,
-				77FA6BEC2280537C00522DAE /* SheetAction.swift in Sources */,
 				77FA6BCE2280528600522DAE /* DGActivityIndicatorBallZigZagDeflectAnimation.m in Sources */,
 				77FA6BB22280528600522DAE /* DGActivityIndicatorLineScalePulseOutAnimation.m in Sources */,
 				77FA6BA62280528600522DAE /* DGActivityIndicatorAnimation.m in Sources */,
@@ -895,6 +893,7 @@
 				779073E022845CAF00104C07 /* AlbumImageView.swift in Sources */,
 				77FA6BAF2280528600522DAE /* DGActivityIndicatorBallRotateAnimation.m in Sources */,
 				77FA6BC92280528600522DAE /* DGActivityIndicatorNineDotsAnimation.m in Sources */,
+				77FA15DC22DDFD1600B0D54A /* AlertSheet.swift in Sources */,
 				77FA6BAE2280528600522DAE /* DGActivityIndicatorBallScaleRippleAnimation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -954,7 +953,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1013,7 +1012,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
