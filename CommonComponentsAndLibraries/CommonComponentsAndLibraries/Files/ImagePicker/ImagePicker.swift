@@ -165,6 +165,7 @@ open class ImagePicker : NSObject{
                 UIApplication.shared.open(url, options: [:], completionHandler: { _ in })
             }
         })
+        alertController.popoverPresentationController?.sourceView = sourceVC.view
         DispatchQueue.main.async {
             self.sourceVC.present(alertController, animated: true)
         }
@@ -268,6 +269,11 @@ open class ImagePicker : NSObject{
             actionSheet.addAction(cancelAction)
             
             actionSheet.view.tintColor = self.tintColor
+            actionSheet.popoverPresentationController?.sourceView = sourceVC.view
+            actionSheet.popoverPresentationController?.sourceRect = CGRect.init(x: sourceVC.view.center.x,
+                                                                                y: sourceVC.view.center.y,
+                                                                                width: 0,
+                                                                                height: 0)
             sourceVC.present(actionSheet, animated: true, completion: nil)
         }else{
             self.showImagePicker(selectedAssests: selectedAssests, isVideo: isVideo)
