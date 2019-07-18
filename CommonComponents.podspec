@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "CommonComponents"
-  s.version      = "0.0.9"
+  s.version      = "0.1.2"
   s.summary      = "A short description of CommonComponentsAndLibraries. and i will use these file for my new projects."
 
   # This description is used to generate tags and improve search results.
@@ -50,7 +50,7 @@ Pod::Spec.new do |s|
   #  profile URL.
   #
   s.swift_version = '4.2'
-  s.ios.deployment_target = '11.0'
+  s.ios.deployment_target = '10.0'
   s.author             = { "Muhammad Ahmed Baig" => "ahmedcs@live.com" }
   # Or just: s.author    = "Muhammad Ahmed Baig"
   # s.authors            = { "Muhammad Ahmed Baig" => "ahmed.baig@appiskey.com" }
@@ -89,7 +89,7 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "CommonComponentsAndLibraries/CommonComponentsAndLibraries/**/*.swift", "CommonComponentsAndLibraries/CommonComponentsAndLibraries/**/*.xib"
+  s.source_files  = "CommonComponentsAndLibraries/CommonComponentsAndLibraries/**/*.swift", "CommonComponentsAndLibraries/CommonComponentsAndLibraries/**/*.xib", "CommonComponentsAndLibraries/CommonComponentsAndLibraries/**/*.h", "CommonComponentsAndLibraries/CommonComponentsAndLibraries/**/*.m"
   s.exclude_files = "Classes/Exclude"
 
   # s.public_header_files = "Classes/**/*.h"

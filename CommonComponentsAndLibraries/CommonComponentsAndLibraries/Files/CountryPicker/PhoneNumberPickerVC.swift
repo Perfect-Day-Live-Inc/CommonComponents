@@ -268,7 +268,7 @@ open class PhoneNumberPickerVC: UIViewController {
                                            style: UIAlertAction.Style.cancel,
                                            handler: nil))
         
-        alert.popoverPresentationController?.sourceView = sourceVC.view
+        alert.popoverPresentationController?.sourceView = self.view
         DispatchQueue.main.async {
             self.present(alert,
                          animated: true,
