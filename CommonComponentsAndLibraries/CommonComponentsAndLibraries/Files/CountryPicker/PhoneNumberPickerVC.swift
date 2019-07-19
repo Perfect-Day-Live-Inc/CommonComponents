@@ -1,6 +1,6 @@
 //
 //  PhoneNumberPickerVC.swift
-//  
+//
 //
 //  Created by MacBook Retina on 11/15/17.
 //  Copyright © 2017 Appiskey. All rights reserved.
@@ -79,7 +79,7 @@ open class PhoneNumberPickerVC: UIViewController {
     
     override open func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         
         let bundle = Bundle.init(for: PhonePickerTVCell.self)
@@ -121,7 +121,7 @@ open class PhoneNumberPickerVC: UIViewController {
         
         self.setData()
     }
-
+    
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if let presentedController = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController{
@@ -179,6 +179,7 @@ open class PhoneNumberPickerVC: UIViewController {
         self.navigationItem.leftBarButtonItem?.tintColor = self.navigationBarItemColor
         
         if isTransparentNavigation{
+            self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
             self.navigationController?.navigationBar.barTintColor = UIColor.clear//color
             self.navigationController?.navigationBar.backgroundColor = UIColor.clear//.getDarkBlueColor//color
             self.navigationController?.navigationBar.isTranslucent = true
@@ -304,6 +305,7 @@ extension PhoneNumberPickerVC : UITableViewDelegate, UITableViewDataSource{
             cell.contentView.backgroundColor = .clear
             cell.countryNameLbl.textColor = textColors
             cell.countryCodeLbl.textColor = textColors
+            cell.backgroundColor = .clear
         }
         return cell
     }
@@ -383,7 +385,7 @@ extension PhoneNumberPickerVC: UISearchBarDelegate, UITextFieldDelegate{
     }
     
     public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        self.view.endEditing(true)
+        //        self.view.endEditing(true)
         if searchText != ""{
             isSearchEnable = true
             arrayToShow = ISOCountries.allCountries.filter({ (model) -> Bool in
