@@ -18,7 +18,25 @@ import UIKit
 //------------------------------------------------------------------------------------------------------//
 //------------------------------------------------------------------------------------------------------//
 //------------------------------------------------------------------------------------------------------//
-
+extension UISearchBar {
+    var textColor:UIColor? {
+        get {
+            if let textField = self.value(forKey: "searchField") as?
+                UITextField  {
+                return textField.textColor
+            } else {
+                return nil
+            }
+        }
+        
+        set (newValue) {
+            if let textField = self.value(forKey: "searchField") as?
+                UITextField  {
+                textField.textColor = newValue
+            }
+        }
+    }
+}
 ///delegate methods which have to imppement by the class which call this class self
 public protocol PhoneNumberPickerVCDelegate {
     func phoneNumberPicker(number: String, isoModel: IsoCountryInfo)
@@ -115,9 +133,13 @@ open class PhoneNumberPickerVC: UIViewController {
             self.numberField.textColor = textColors
             self.searchBar.backgroundColor = .clear
             self.searchBar.tintColor = textColors
+            self.searchBar.textColor = textColors
             self.tableView.backgroundColor = .clear
             self.seperatorView.backgroundColor = textColors
         }
+        
+        self.tableView.keyboardDismissMode = .onDrag
+        
         
         self.setData()
     }
