@@ -87,6 +87,7 @@ open class PhoneNumberPickerVC: UIViewController {
     public var backBarItemImage: UIImage!
     public var rightBarItemImage: UIImage? = nil
     public var backgroundImage: UIImage? = nil
+    public var backgroundColor: UIColor = .white
     public var isTransparentNavigation: Bool = false
     public var navigationBarItemColor: UIColor = .black
     public var textColors: UIColor = .black
@@ -125,17 +126,20 @@ open class PhoneNumberPickerVC: UIViewController {
         self.numberField.delegate = self
         self.tableView.tableFooterView = UIView()
         self.tableView.reloadData()
+        self.tableView.backgroundColor = backgroundColor
+        self.searchBar.backgroundColor = backgroundColor
+        self.topInputView.backgroundColor = backgroundColor
+        self.searchBar.tintColor = textColors
+        self.searchBar.textColor = textColors
+        self.codeLbl.textColor = textColors
+        self.numberField.textColor = textColors
+        self.seperatorView.backgroundColor = textColors
         
         if backgroundImage != nil{
             self.bgImageView.image = backgroundImage
             self.topInputView.backgroundColor = .clear
-            self.codeLbl.textColor = textColors
-            self.numberField.textColor = textColors
             self.searchBar.backgroundColor = .clear
-            self.searchBar.tintColor = textColors
-            self.searchBar.textColor = textColors
             self.tableView.backgroundColor = .clear
-            self.seperatorView.backgroundColor = textColors
         }
         
         self.tableView.keyboardDismissMode = .onDrag
@@ -323,11 +327,15 @@ extension PhoneNumberPickerVC : UITableViewDelegate, UITableViewDataSource{
                 cell.tickWidth.constant = 0
             }
         }
+        
+        cell.countryNameLbl.textColor = textColors
+        cell.countryCodeLbl.textColor = textColors
         if self.backgroundImage != nil{
             cell.contentView.backgroundColor = .clear
-            cell.countryNameLbl.textColor = textColors
-            cell.countryCodeLbl.textColor = textColors
             cell.backgroundColor = .clear
+        }else{
+            cell.contentView.backgroundColor = backgroundColor
+            cell.backgroundColor = backgroundColor
         }
         return cell
     }
