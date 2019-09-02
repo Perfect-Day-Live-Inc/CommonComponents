@@ -100,6 +100,7 @@ open class ImagePicker : NSObject{
     private override init() {super.init()}
     static public let getInstance = ImagePicker()
     
+    let bundle = Bundle.init(for: CameraController.self)
     public var delegate : ImagePickerDelegate!
     public var imageLimit : Int = 5
     public var fontForPicker = UIFont.systemFont(ofSize: 18)
@@ -113,12 +114,15 @@ open class ImagePicker : NSObject{
     private var indicatorLbl : UILabel!
     private var indicatorView : UIView!
     private var mainView : UIView!
+    private var maximumDurationOfVideoInSeconds = 30.0
     
     public func showPickerController(fromVC : UIViewController,
                                       selectedAssests: [PHAsset]?=nil,
                                       delegateFromVC : ImagePickerDelegate?=nil,
                                       imageLimit : Int?=nil,
-                                      isVideo : Bool=false){
+                                      isVideo : Bool=false,
+                                      maximumDurationOfVideoInSeconds: TimeInterval=30.0){
+        self.maximumDurationOfVideoInSeconds = maximumDurationOfVideoInSeconds
         self.sourceVC = fromVC
         if delegateFromVC != nil{
             self.delegate = delegateFromVC!
@@ -132,11 +136,10 @@ open class ImagePicker : NSObject{
     }
     
     public func showCameraController(fromVC : UIViewController,
-                                selectedAssests: [PHAsset]?=nil,
                                 delegateFromVC : ImagePickerDelegate?=nil,
                                 imageLimit : Int?=nil,
                                 isVideo : Bool=false,
-                                duration: TimeInterval=30.0){
+                                maximumDurationInSeconds: TimeInterval=30.0){
         self.sourceVC = fromVC
         if delegateFromVC != nil{
             self.delegate = delegateFromVC!
@@ -147,7 +150,7 @@ open class ImagePicker : NSObject{
         }
         self.imageLimit = imageLimit ?? self.imageLimit
         if isVideo{
-            self.showVideoController(duration: duration,
+            self.showVideoController(maximumDurationInSeconds: maximumDurationInSeconds,
                                      fromVC: self.sourceVC,
                                      delegateFromVC: self.delegate)
         }else{
@@ -252,7 +255,7 @@ open class ImagePicker : NSObject{
                     self.presentCameraSettings()
                 }else{
                     if isVideo == true{
-                            self.showVideoController(fromVC: self.sourceVC, delegateFromVC: self.sourceVC as! ImagePickerDelegate)
+                        self.showVideoController(maximumDurationInSeconds: self.maximumDurationOfVideoInSeconds, fromVC: self.sourceVC, delegateFromVC: self.sourceVC as! ImagePickerDelegate)
                     }else{
                         self.openCamera()
                     }
@@ -274,7 +277,9 @@ open class ImagePicker : NSObject{
                                                                                 y: sourceVC.view.center.y,
                                                                                 width: 0,
                                                                                 height: 0)
-            sourceVC.present(actionSheet, animated: true, completion: nil)
+            DispatchQueue.main.async {
+                self.sourceVC.present(actionSheet, animated: true, completion: nil)
+            }
         }else{
             self.showImagePicker(selectedAssests: selectedAssests, isVideo: isVideo)
         }
@@ -293,29 +298,42 @@ open class ImagePicker : NSObject{
         }else if pickerType != .camera{
             picker.sourceType = pickerType
         }
-        if pickerType == .camera{
-            picker.mediaTypes = [kUTTypeImage as String]
-        }
-        picker.allowsEditing = self.allowEditing
-        picker.delegate = self
-        picker.navigationBar.isTranslucent = false
-        picker.navigationBar.backgroundColor = UIColor.white
-        picker.navigationBar.tintColor = self.tintColor
-        picker.navigationBar.barTintColor = UIColor.white
-        picker.navigationBar.isHidden = false
         
-        picker.navigationBar.titleTextAttributes = [
-            NSAttributedString.Key.foregroundColor : self.tintColor,
-            NSAttributedString.Key.font : self.fontForPicker]
-        
-        if picker.isBeingPresented{
-            print("MEOW MEOW MEOW")
+        if #available(iOS 11.0, *){
+            let vc = CameraController.init(nibName: "CameraController", bundle: bundle)
+            vc.captureMode = .picture
+            vc.delegate = self
+            DispatchQueue.main.async {
+                self.sourceVC.present(vc, animated: true, completion: nil)
+            }
         }else{
-            sourceVC.present(picker, animated: false, completion: nil)
+            if pickerType == .camera{
+                picker.mediaTypes = [kUTTypeImage as String]
+            }
+            picker.allowsEditing = self.allowEditing
+            picker.delegate = self
+            picker.navigationBar.isTranslucent = false
+            picker.navigationBar.backgroundColor = UIColor.white
+            picker.navigationBar.tintColor = self.tintColor
+            picker.navigationBar.barTintColor = UIColor.white
+            picker.navigationBar.isHidden = false
+            
+            picker.navigationBar.titleTextAttributes = [
+                NSAttributedString.Key.foregroundColor : self.tintColor,
+                NSAttributedString.Key.font : self.fontForPicker]
+            
+            if picker.isBeingPresented{
+                print("MEOW MEOW MEOW")
+            }else{
+                DispatchQueue.main.async {
+                    self.sourceVC.present(self.picker, animated: false, completion: nil)
+                }
+            }
         }
+        
     }
     
-    private func showVideoController(duration: TimeInterval=30.0,
+    private func showVideoController(maximumDurationInSeconds: TimeInterval=30.0,
                              fromVC : UIViewController,
                              delegateFromVC : ImagePickerDelegate){
         pickerType = .camera
@@ -330,27 +348,40 @@ open class ImagePicker : NSObject{
             picker.sourceType = .camera
         }
         
-        picker.delegate = self
-        picker.mediaTypes = [kUTTypeMovie as String]
         
-        picker.videoMaximumDuration = duration
-        
-        picker.allowsEditing = self.allowEditing
-        picker.videoQuality = .typeMedium
-        
-        picker.navigationBar.isTranslucent = false
-        picker.navigationBar.backgroundColor = UIColor.white
-        picker.navigationBar.tintColor = self.tintColor
-        picker.navigationBar.barTintColor = UIColor.white
-        picker.navigationBar.isHidden = false
-        
-        picker.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : self.tintColor,
-                                                    NSAttributedString.Key.font : self.fontForPicker]
-        
-        self.sourceVC = fromVC
-        self.delegate = delegateFromVC
-        
-        sourceVC.present(picker, animated: true, completion: nil)
+        if #available(iOS 11.0, *){
+            let vc = CameraController.init(nibName: "CameraController", bundle: bundle)
+            vc.captureMode = .video
+            vc.delegate = self
+            vc.maximumDurationInSeconds = Int(maximumDurationInSeconds)
+            DispatchQueue.main.async {
+                self.sourceVC.present(vc, animated: true, completion: nil)
+            }
+        }else{
+            picker.delegate = self
+            picker.mediaTypes = [kUTTypeMovie as String]
+            
+            picker.videoMaximumDuration = maximumDurationInSeconds
+            
+            picker.allowsEditing = self.allowEditing
+            picker.videoQuality = .typeMedium
+            
+            picker.navigationBar.isTranslucent = false
+            picker.navigationBar.backgroundColor = UIColor.white
+            picker.navigationBar.tintColor = self.tintColor
+            picker.navigationBar.barTintColor = UIColor.white
+            picker.navigationBar.isHidden = false
+            
+            picker.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : self.tintColor,
+                                                        NSAttributedString.Key.font : self.fontForPicker]
+            
+            self.sourceVC = fromVC
+            self.delegate = delegateFromVC
+            
+            DispatchQueue.main.async {
+                self.sourceVC.present(self.picker, animated: true, completion: nil)
+            }
+        }
     }
     
     private func showImagePicker(selectedAssests: [PHAsset]?=nil, isVideo: Bool=false){
@@ -376,17 +407,74 @@ open class ImagePicker : NSObject{
         
         pickerViewController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : self.tintColor,
                                                                   NSAttributedString.Key.font : self.fontForPicker]
-        sourceVC.present(pickerViewController, animated: true, completion: nil)
+        
+        DispatchQueue.main.async {
+            self.sourceVC.present(pickerViewController, animated: true, completion: nil)
+        }
         
     }
     
+}
+
+extension ImagePicker: CameraControllerDelegate{
+    func cameraControllerCancelled(_ controller: UIViewController) {
+        DispatchQueue.main.async {
+            controller.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    func cameraControllerCapturedVideo(_ videoURL: URL, controller: UIViewController) {
+        var imageM = ImagePickerModel()
+        imageM.fileName = "video.mov"
+        imageM.fileType = .video
+        self.encodeVideo(videoURL: videoURL, completion: { (url) in
+            if url != nil{
+                imageM.fileName = "video.mp4"
+                imageM.url = url!
+                if self.delegate != nil{
+                    DispatchQueue.main.async {
+                        self.picker = UIImagePickerController()
+                        self.delegate!.PickerDidPicked(images: [imageM], downloadErrorString: nil)
+                        controller.dismiss(animated: true, completion: nil)
+                    }
+                }
+                return
+            }else{
+                imageM.url = videoURL
+                if self.delegate != nil{
+                    DispatchQueue.main.async {
+                        self.picker = UIImagePickerController()
+                        self.delegate!.PickerDidPicked(images: [imageM], downloadErrorString: nil)
+                        controller.dismiss(animated: true, completion: nil)
+                    }
+                }
+            }
+        })
+    }
+    
+    func cameraControllerCapturedImage(_ image: UIImage, controller: UIViewController) {
+        var imageM = ImagePickerModel()
+        imageM.fileName = "Image.jpg"
+        imageM.fileType = .image
+        imageM.image = image
+        if delegate != nil{
+            self.picker = UIImagePickerController()
+            DispatchQueue.main.async {
+                controller.dismiss(animated: true, completion: {
+                    self.delegate!.PickerDidPicked(images: [imageM], downloadErrorString: nil)
+                })
+            }
+        }
+    }
 }
 
 extension ImagePicker : UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
     
     public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: true, completion: nil)
+        DispatchQueue.main.async {
+            picker.dismiss(animated: true, completion: nil)
+        }
         self.picker = UIImagePickerController()
     }
     
@@ -402,18 +490,22 @@ extension ImagePicker : UIImagePickerControllerDelegate, UINavigationControllerD
                 if url != nil{
                     image.url = url!
                     if self.delegate != nil{
-                        picker.dismiss(animated: true, completion: {
-                            self.picker = UIImagePickerController()
-                            self.delegate!.PickerDidPicked(images: [image], downloadErrorString: nil)
-                        })
+                        DispatchQueue.main.async {
+                            picker.dismiss(animated: true, completion: {
+                                self.picker = UIImagePickerController()
+                                self.delegate!.PickerDidPicked(images: [image], downloadErrorString: nil)
+                            })
+                        }
                     }
                     return
                 }else{
                     if self.delegate != nil{
-                        picker.dismiss(animated: true, completion: {
-                            self.picker = UIImagePickerController()
-                            self.delegate!.PickerDidPicked(images: [image], downloadErrorString: nil)
-                        })
+                        DispatchQueue.main.async {
+                            picker.dismiss(animated: true, completion: {
+                                self.picker = UIImagePickerController()
+                                self.delegate!.PickerDidPicked(images: [image], downloadErrorString: nil)
+                            })
+                        }
                     }
                 }
             })
@@ -450,10 +542,12 @@ extension ImagePicker : UIImagePickerControllerDelegate, UINavigationControllerD
                 }
             }
             if delegate != nil{
-                picker.dismiss(animated: true, completion: {
-                    self.picker = UIImagePickerController()
-                    self.delegate!.PickerDidPicked(images: [image], downloadErrorString: nil)
-                })
+                DispatchQueue.main.async {
+                    picker.dismiss(animated: true, completion: {
+                        self.picker = UIImagePickerController()
+                        self.delegate!.PickerDidPicked(images: [image], downloadErrorString: nil)
+                    })
+                }
             }
         }
     }
@@ -462,16 +556,18 @@ extension ImagePicker : UIImagePickerControllerDelegate, UINavigationControllerD
 extension ImagePicker : TatsiPickerViewControllerDelegate {
     
     public func pickerViewController(_ pickerViewController: TatsiPickerViewController, didPickAssets assets: [PHAsset]) {
-        pickerViewController.dismiss(animated: true, completion: nil)
+        DispatchQueue.main.async {
+            pickerViewController.dismiss(animated: true, completion: nil)
+        }
         print("Assets \(assets)")
         print(assets)
         var arrayOfUIImages = [ImagePickerModel]()
         
         for asset in assets{
             if asset.mediaType == .video {
-                if asset.duration > 30{
+                if asset.duration > self.maximumDurationOfVideoInSeconds{
                     if delegate != nil{
-                        self.delegate!.PickerDidPicked(images: arrayOfUIImages, downloadErrorString: "Video should not be greater then 30 sec.")
+                        self.delegate!.PickerDidPicked(images: arrayOfUIImages, downloadErrorString: "Video should not be greater then \(maximumDurationOfVideoInSeconds) sec.")
                         return
                     }
                 }
@@ -580,8 +676,8 @@ extension ImagePicker{
                 let time = endDate.timeIntervalSince(startDate)
                 print(time)
                 print("Successful")
-                print(exportSession?.outputURL ?? "")
-                completion(exportSession?.outputURL)
+                print(exportSession!.outputURL ?? "")
+                completion(exportSession!.outputURL)
             default:
                 completion(nil)
                 break
