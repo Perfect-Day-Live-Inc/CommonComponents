@@ -92,6 +92,7 @@ open class PhoneNumberPickerVC: UIViewController {
     public var navigationBarItemColor: UIColor = .black
     public var textColors: UIColor = .black
     public var navigationFont: UIFont = UIFont.systemFont(ofSize: 17)
+    public var isCodeRequired = true
     
     var isPresented : Bool = true
     var isNavigationHiddenInParent : Bool = true
@@ -126,6 +127,7 @@ open class PhoneNumberPickerVC: UIViewController {
         self.numberField.delegate = self
         self.tableView.tableFooterView = UIView()
         self.tableView.reloadData()
+        self.view.backgroundColor = backgroundColor
         self.tableView.backgroundColor = backgroundColor
         self.searchBar.backgroundColor = backgroundColor
         self.topInputView.backgroundColor = backgroundColor
@@ -364,8 +366,14 @@ extension PhoneNumberPickerVC : UITableViewDelegate, UITableViewDataSource{
         if numberField.text != "", numberField.text!.count >= self.minmumDigitsRequired, numberField.text!.count <= self.maximumExcludingDailingCode{
             if self.isValidPhoneNumber(number: self.codeLbl.text! + "" + self.numberField.text!){
                 if delegate != nil{
-                    delegate!.phoneNumberPicker(number: self.codeLbl.text! + "" + self.numberField.text!,
-                                                isoModel: self.countryModel!)
+                    if isCodeRequired {
+                        delegate!.phoneNumberPicker(number: self.codeLbl.text! + "" + self.numberField.text!,
+                                                    isoModel: self.countryModel!)
+                    } else {
+                        delegate!.phoneNumberPicker(number: self.numberField.text!,
+                                                    isoModel: self.countryModel!)
+                    }
+                    
                     if self.isPresented{
                         self.dismiss(animated: true, completion: nil)
                     }else{
