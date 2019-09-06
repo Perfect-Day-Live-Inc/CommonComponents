@@ -36,18 +36,21 @@ open class Loader {
     
     
     public var loaderColor: UIColor = .white
+    public var backColor: UIColor = UIColor.black.withAlphaComponent(0.4)
     public var textColor: UIColor = .white
     public var loaderType : DGActivityIndicatorAnimationType = .ballSpinFadeLoader
     public var loaderSize : CGFloat = 50.0
     
     private func setUpLoader(inView: UIView,
+                             backColor: UIColor?=nil,
                              loaderColor: UIColor?=nil,
                              txtToShow: String?=nil,
                              txtColor: UIColor?=nil,
                              loaderType : DGActivityIndicatorAnimationType?=nil){
-
+        
         self.viewForActivity.isHidden = false
         self.activityIndicatorView.isHidden = false
+        self.viewForActivity.backgroundColor = (backColor != nil) ? backColor : self.backColor
         if txtToShow != nil{
             self.TxtLbl.isHidden = false
         }
@@ -94,11 +97,17 @@ open class Loader {
     }
     
     public func showLoader(inView: UIView,
+                           backColor: UIColor?=nil,
                            loaderColor: UIColor?=nil,
                            txtToShow: String?=nil,
                            txtColor: UIColor?=nil,
                            loaderType : DGActivityIndicatorAnimationType?=nil){
-        setUpLoader(inView: inView, loaderColor: loaderColor, txtToShow: txtToShow, txtColor: txtColor, loaderType: loaderType)
+        setUpLoader(inView: inView,
+                    backColor: backColor,
+                    loaderColor: loaderColor,
+                    txtToShow: txtToShow,
+                    txtColor: txtColor,
+                    loaderType: loaderType)
         activityIndicatorView.startAnimating()
     }
     
@@ -106,7 +115,7 @@ open class Loader {
         self.activityIndicatorView = DGActivityIndicatorView(type: .ballSpinFadeLoader, tintColor: self.loaderColor, size: 50)
         self.activityIndicatorView.bounds = CGRect(x: 0.0, y: 0.0, width: 50.0, height: 50.0)
         self.TxtLbl.bounds = CGRect(x: 0.0, y: 0.0, width: 50.0, height: 50.0)
-        viewForActivity.backgroundColor = UIColor.clear
+        viewForActivity.backgroundColor = self.backColor
         TxtLbl.backgroundColor = UIColor.clear
         self.viewForActivity.alpha = 0
         self.TxtLbl.alpha = 0

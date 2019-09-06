@@ -1,6 +1,6 @@
 //
 //  NullDataView.swift
-//  
+//
 //
 //  Created by Muhammad Ahmed Baig on 31/01/2018.
 //  Copyright © 2018 Appiskey. All rights reserved.
@@ -37,6 +37,7 @@ open class NullDataView{
     var tapToRetry : UILabel = UILabel()
     
     public var defaultImage : UIImage? = nil
+    public var backgroundColor : UIColor = .clear
     
     private func setUpView(inView: UIView,
                            textToShow: String,
@@ -46,6 +47,8 @@ open class NullDataView{
                            tapAction: Selector?=nil,
                            tapToRetryTxt: String){
         self.setNullView()
+        
+        self.backView.backgroundColor = backgroundColor
         self.alertLbl.text = textToShow
         self.alertLbl.textColor = textColor
         self.alertLbl.font = textFont
@@ -61,9 +64,6 @@ open class NullDataView{
             self.backViewBtn.addTarget(nil, action: tapAction!, for: .touchUpInside)
         }
         
-        self.alertLbl.backgroundColor = .yellow
-        
-        //
         
         if image != nil{
             self.nullImage.backgroundColor = UIColor.green
@@ -155,7 +155,7 @@ open class NullDataView{
     }
     
     private func setNullView(){
-        self.backView.backgroundColor = UIColor.white
+        self.backView.backgroundColor = backgroundColor
         self.alertLbl.textColor = UIColor.black
         self.alertLbl.numberOfLines = 0
         self.alertLbl.font = self.alertLbl.font.withSize(14)

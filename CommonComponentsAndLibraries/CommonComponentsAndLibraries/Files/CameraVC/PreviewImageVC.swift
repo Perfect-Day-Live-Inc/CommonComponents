@@ -14,7 +14,7 @@ protocol PreviewImageVCDelegate {
 }
 
 class PreviewImageVC: UIViewController {
-
+    
     let bundle = Bundle.init(for: CameraController.self)
     @IBOutlet weak var rightBBtn: UIButton!
     @IBOutlet weak var leftBBtn: UIButton!

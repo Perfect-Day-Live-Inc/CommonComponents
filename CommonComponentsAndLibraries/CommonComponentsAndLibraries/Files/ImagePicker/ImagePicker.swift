@@ -407,7 +407,7 @@ extension ImagePicker: CameraControllerDelegate{
     }
     
     func cameraControllerCapturedVideo(_ videoURL: URL, controller: UIViewController) {
-        self.encodeAndSendVideo(videoURL: videoURL, vc: picker)
+        self.encodeAndSendVideo(videoURL: videoURL, vc: controller)
     }
     
     func cameraControllerCapturedImage(_ image: UIImage, controller: UIViewController) {

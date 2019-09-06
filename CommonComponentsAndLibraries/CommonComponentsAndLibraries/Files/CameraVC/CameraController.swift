@@ -110,7 +110,7 @@ class CameraController: UIViewController {
                 self.redDotView.isHidden = true
                 timer.invalidate()
                 self.stopRecording()
-//                self.showAlert(title: "Alert", message: "Max Limit.")
+                //                self.showAlert(title: "Alert", message: "Max Limit.")
             }
         }else{
             self.stopRecording()
@@ -279,7 +279,7 @@ class CameraController: UIViewController {
     
     func captureImage(){
         let captureSettings = AVCapturePhotoSettings()
-//        captureSettings.
+        //        captureSettings.
         let previewPixelType = captureSettings.availablePreviewPhotoPixelFormatTypes.first!
         let previewFormat = [kCVPixelBufferPixelFormatTypeKey as String: previewPixelType,
                              kCVPixelBufferWidthKey as String: 300,
@@ -390,33 +390,33 @@ class CameraController: UIViewController {
     
     @IBAction func pinchGesturePinching(_ sender: UIPinchGestureRecognizer) {
         if sender.state == .began || sender.state == .changed{
-//            if sender.scale > 0.0 && sender.scale < 1.0{
-//                print("zoom out")
-                do {
-                    try self.captureDevice.lockForConfiguration()
-                    defer { self.captureDevice.unlockForConfiguration() }
-//                    if sender.scale <= max{
-                    self.captureDevice.cancelVideoZoomRamp()
-                    var scale = (sender.scale + 1)
-                    if sender.scale == 0{
-                        scale = sender.scale
-                    }
-                    self.captureDevice.ramp(toVideoZoomFactor: scale, withRate: Float(sender.velocity))
-//                    }
-                } catch{
-                    debugPrint(error)
+            //            if sender.scale > 0.0 && sender.scale < 1.0{
+            //                print("zoom out")
+            do {
+                try self.captureDevice.lockForConfiguration()
+                defer { self.captureDevice.unlockForConfiguration() }
+                //                    if sender.scale <= max{
+                self.captureDevice.cancelVideoZoomRamp()
+                var scale = (sender.scale + 1)
+                if sender.scale == 0{
+                    scale = sender.scale
                 }
-//            }else{
-//                print("zoom in")
-//                print("zoom out")
-//                do {
-//                    try self.captureDevice.lockForConfiguration()
-//                    defer { self.captureDevice.unlockForConfiguration() }
-//                    self.captureDevice.videoZoomFactor -= 1
-//                } catch{
-//                    debugPrint(error)
-//                }
-//            }
+                self.captureDevice.ramp(toVideoZoomFactor: scale, withRate: Float(sender.velocity))
+                //                    }
+            } catch{
+                debugPrint(error)
+            }
+            //            }else{
+            //                print("zoom in")
+            //                print("zoom out")
+            //                do {
+            //                    try self.captureDevice.lockForConfiguration()
+            //                    defer { self.captureDevice.unlockForConfiguration() }
+            //                    self.captureDevice.videoZoomFactor -= 1
+            //                } catch{
+            //                    debugPrint(error)
+            //                }
+            //            }
         }
     }
     
@@ -516,7 +516,7 @@ extension CameraController : UINavigationControllerDelegate, UIVideoEditorContro
             self.isEditedVideoSaved = !self.isEditedVideoSaved
             if delegate != nil{
                 let url = URL.init(fileURLWithPath: editedVideoPath)
-                    self.delegate!.cameraControllerCapturedVideo(url, controller: self)
+                self.delegate!.cameraControllerCapturedVideo(url, controller: self)
                 
             }
             DispatchQueue.main.async {
