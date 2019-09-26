@@ -1,6 +1,6 @@
 //
 //  Loader.swift
-//  BHRN
+//  
 //
 //  Created by Muhammad Ahmed Baig on 26/08/2017.
 //  Copyright © 2017 PNC. All rights reserved.
@@ -41,69 +41,70 @@ open class Loader {
     public var loaderType : DGActivityIndicatorAnimationType = .ballSpinFadeLoader
     public var loaderSize : CGFloat = 50.0
     
-    private func setUpLoader(inView: UIView,
-                             backColor: UIColor?=nil,
+    private func setUpLoader(backColor: UIColor?=nil,
                              loaderColor: UIColor?=nil,
                              txtToShow: String?=nil,
                              txtColor: UIColor?=nil,
                              loaderType : DGActivityIndicatorAnimationType?=nil){
         
-        self.viewForActivity.isHidden = false
-        self.activityIndicatorView.isHidden = false
-        self.viewForActivity.backgroundColor = (backColor != nil) ? backColor : self.backColor
-        if txtToShow != nil{
-            self.TxtLbl.isHidden = false
-        }
-        
-        if loaderColor == nil{
-            self.activityIndicatorView.tintColor = self.loaderColor
-        }else{
-            self.activityIndicatorView.tintColor = loaderColor!
-        }
-        
-        if loaderType == nil{
-            self.activityIndicatorView.type = self.loaderType
-        }else{
-            self.activityIndicatorView.type = loaderType!
-        }
-        
-        UIView.animate(withDuration: 1.0) {
-            self.viewForActivity.alpha = 1.0
-            self.activityIndicatorView.alpha = 1.0
+        if let rootVC = UIApplication.shared.keyWindow?.rootViewController{
+            self.viewForActivity.isHidden = false
+            self.activityIndicatorView.isHidden = false
+            self.viewForActivity.backgroundColor = (backColor != nil) ? backColor : self.backColor
             if txtToShow != nil{
-                self.TxtLbl.alpha = 1.0
+                self.TxtLbl.isHidden = false
             }
-        }
-        if txtToShow != nil{
-            self.timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(timeUpdate), userInfo: nil, repeats: true)
-            self.viewForActivity.addSubview(self.TxtLbl)
-        }
-        self.viewForActivity.frame = inView.bounds
-        self.activityIndicatorView.center = self.viewForActivity.center
-        self.viewForActivity.addSubview(self.activityIndicatorView)
-        
-        if txtToShow != nil{
-            self.TxtLbl.frame = CGRect(x: 20, y: self.activityIndicatorView.frame.maxY + 10, width: inView.bounds.width - 40, height: 50)
-            self.TxtLbl.text = txtToShow!
-            self.TxtLbl.textAlignment = .center
-            if txtColor == nil{
-                self.TxtLbl.textColor = self.textColor
+            
+            if loaderColor == nil{
+                self.activityIndicatorView.tintColor = self.loaderColor
             }else{
-                self.TxtLbl.textColor = txtColor!
+                self.activityIndicatorView.tintColor = loaderColor!
             }
+            
+            if loaderType == nil{
+                self.activityIndicatorView.type = self.loaderType
+            }else{
+                self.activityIndicatorView.type = loaderType!
+            }
+            
+            UIView.animate(withDuration: 1.0) {
+                self.viewForActivity.alpha = 1.0
+                self.activityIndicatorView.alpha = 1.0
+                if txtToShow != nil{
+                    self.TxtLbl.alpha = 1.0
+                }
+            }
+            if txtToShow != nil{
+                self.timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(timeUpdate), userInfo: nil, repeats: true)
+                self.viewForActivity.addSubview(self.TxtLbl)
+            }
+            self.viewForActivity.frame = rootVC.view.bounds
+            self.activityIndicatorView.center = self.viewForActivity.center
+            self.viewForActivity.addSubview(self.activityIndicatorView)
+            
+            if txtToShow != nil{
+                self.TxtLbl.frame = CGRect(x: 20, y: self.activityIndicatorView.frame.maxY + 10, width: rootVC.view.bounds.width - 40, height: 50)
+                self.TxtLbl.text = txtToShow!
+                self.TxtLbl.textAlignment = .center
+                if txtColor == nil{
+                    self.TxtLbl.textColor = self.textColor
+                }else{
+                    self.TxtLbl.textColor = txtColor!
+                }
+            }
+            
+            rootVC.view.addSubview(self.viewForActivity)
+            rootVC.view.bringSubviewToFront(self.viewForActivity)
         }
-        inView.addSubview(self.viewForActivity)
-        inView.bringSubviewToFront(self.viewForActivity)
+        
     }
     
-    public func showLoader(inView: UIView,
-                           backColor: UIColor?=nil,
+    public func showLoader(backColor: UIColor?=nil,
                            loaderColor: UIColor?=nil,
                            txtToShow: String?=nil,
                            txtColor: UIColor?=nil,
                            loaderType : DGActivityIndicatorAnimationType?=nil){
-        setUpLoader(inView: inView,
-                    backColor: backColor,
+        setUpLoader(backColor: backColor,
                     loaderColor: loaderColor,
                     txtToShow: txtToShow,
                     txtColor: txtColor,
@@ -121,25 +122,27 @@ open class Loader {
         self.TxtLbl.alpha = 0
     }
     
-    public func hideLoader(inView: UIView){
+    public func hideLoader(){
         if activityIndicatorView != nil{
             activityIndicatorView.stopAnimating()
             self.timer.invalidate()
-            if(inView.subviews.contains(self.viewForActivity)){
-                UIView.animate(withDuration: 1.0, animations: {
-                    self.viewForActivity.alpha = 0.0
-                    self.activityIndicatorView.alpha = 0.0
-                    self.TxtLbl.alpha = 0.0
-                }, completion: { (status) in
-                    if status {
-                        self.activityIndicatorView.isHidden = true
-                        self.viewForActivity.isHidden = true
-                        self.TxtLbl.isHidden = true
-                        self.TxtLbl.removeFromSuperview()
-                        self.activityIndicatorView.removeFromSuperview()
-                        self.viewForActivity.removeFromSuperview()
-                    }
-                })
+            if let rootVC = UIApplication.shared.keyWindow?.rootViewController{
+                if(rootVC.view.subviews.contains(self.viewForActivity)){
+                    UIView.animate(withDuration: 1.0, animations: {
+                        self.viewForActivity.alpha = 0.0
+                        self.activityIndicatorView.alpha = 0.0
+                        self.TxtLbl.alpha = 0.0
+                    }, completion: { (status) in
+                        if status {
+                            self.activityIndicatorView.isHidden = true
+                            self.viewForActivity.isHidden = true
+                            self.TxtLbl.isHidden = true
+                            self.TxtLbl.removeFromSuperview()
+                            self.activityIndicatorView.removeFromSuperview()
+                            self.viewForActivity.removeFromSuperview()
+                        }
+                    })
+                }
             }
         }
     }
