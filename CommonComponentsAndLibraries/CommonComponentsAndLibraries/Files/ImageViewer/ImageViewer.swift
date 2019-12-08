@@ -230,7 +230,7 @@ open class ImageViewer: UIViewController {
     }
     
     public static func presentImageViewer(with mediaPaths: [String]){
-        if let rootVC = UIApplication.shared.keyWindow?.rootViewController{
+        if let rootVC = UIApplication.getTopViewController(){
             let imageVC = ImageViewer(nibName: "ImageViewer", bundle: Bundle.init(for: ImageViewer.self))//AppRouter.ImageViewerVC()
             var pathsToSave : [String] = mediaPaths
             
@@ -276,7 +276,7 @@ open class ImageViewer: UIViewController {
             return str == ""
         }
         
-        if let rootVC = UIApplication.shared.keyWindow?.rootViewController{
+        if let rootVC = UIApplication.getTopViewController(){
             self.providesPresentationContextTransitionStyle = true
             self.definesPresentationContext = true
             self.modalPresentationStyle=UIModalPresentationStyle.overCurrentContext

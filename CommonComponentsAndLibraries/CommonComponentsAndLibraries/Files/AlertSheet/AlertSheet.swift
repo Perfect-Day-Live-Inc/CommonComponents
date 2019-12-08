@@ -81,7 +81,7 @@ public class AlertSheet: UIViewController {
         self.modalPresentationStyle=UIModalPresentationStyle.overCurrentContext
         self.modalTransitionStyle = .crossDissolve
         DispatchQueue.main.async {
-            if let rootWindow = UIApplication.shared.keyWindow?.rootViewController{
+            if let rootWindow = UIApplication.getTopViewController(){
                 rootWindow.present(self, animated: true, completion: nil)
             }
         }

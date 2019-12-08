@@ -196,7 +196,7 @@ open class AlertViewController: UIViewController {
         vc.modalPresentationStyle=UIModalPresentationStyle.overCurrentContext
         vc.modalTransitionStyle = .crossDissolve
         DispatchQueue.main.async {
-            if let rootWindow = UIApplication.shared.keyWindow?.rootViewController{
+            if let rootWindow = UIApplication.getTopViewController(){
                 rootWindow.present(vc, animated: true, completion: nil)
             }
         }
@@ -209,7 +209,7 @@ open class AlertViewController: UIViewController {
             self.modalPresentationStyle=UIModalPresentationStyle.overCurrentContext
             self.modalTransitionStyle = .crossDissolve
             DispatchQueue.main.async {
-                if let rootWindow = UIApplication.shared.keyWindow?.rootViewController{
+                if let rootWindow = UIApplication.getTopViewController(){
                     rootWindow.present(self, animated: true, completion: nil)
                 }
             }

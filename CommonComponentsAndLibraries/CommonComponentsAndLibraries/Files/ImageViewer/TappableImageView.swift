@@ -8,6 +8,23 @@
 
 import UIKit
 
+extension UIApplication {
+
+    class func getTopViewController(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+
+        if let nav = base as? UINavigationController {
+            return getTopViewController(base: nav.visibleViewController)
+
+        } else if let tab = base as? UITabBarController, let selected = tab.selectedViewController {
+            return getTopViewController(base: selected)
+
+        } else if let presented = base?.presentedViewController {
+            return getTopViewController(base: presented)
+        }
+        return base
+    }
+}
+
 class TappableImageView: UIImageView {
 
     /*
@@ -36,7 +53,7 @@ class TappableImageView: UIImageView {
     
     @objc func openImage(){
         if self.imagesPath != nil{
-            if let rootVC = UIApplication.shared.keyWindow?.rootViewController{
+            if let rootVC = UIApplication.getTopViewController(){
                 let bundle = Bundle.init(for: ImageViewer.self)
                 let imageVC = ImageViewer(nibName: "ImageViewer", bundle: bundle)//AppRouter.ImageViewerVC()
                 imageVC.mediaPaths = self.imagesPath!

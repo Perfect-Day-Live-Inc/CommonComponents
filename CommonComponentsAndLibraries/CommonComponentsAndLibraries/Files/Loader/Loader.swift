@@ -47,7 +47,7 @@ open class Loader {
                              txtColor: UIColor?=nil,
                              loaderType : DGActivityIndicatorAnimationType?=nil){
         
-        if let rootVC = UIApplication.shared.keyWindow?.rootViewController{
+        if let rootVC = UIApplication.getTopViewController(){
             self.viewForActivity.isHidden = false
             self.activityIndicatorView.isHidden = false
             self.viewForActivity.backgroundColor = (backColor != nil) ? backColor : self.backColor
@@ -126,7 +126,7 @@ open class Loader {
         if activityIndicatorView != nil{
             activityIndicatorView.stopAnimating()
             self.timer.invalidate()
-            if let rootVC = UIApplication.shared.keyWindow?.rootViewController{
+            if let rootVC = UIApplication.getTopViewController(){
                 if(rootVC.view.subviews.contains(self.viewForActivity)){
                     UIView.animate(withDuration: 1.0, animations: {
                         self.viewForActivity.alpha = 0.0
