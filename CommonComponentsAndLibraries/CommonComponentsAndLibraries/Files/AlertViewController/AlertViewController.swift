@@ -20,8 +20,6 @@ public enum PopUpStyle {
     case doubleBtn
 }
 
-
-
 public struct AlertConfiguration{
     
     public var message: String

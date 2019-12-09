@@ -48,6 +48,7 @@ open class Loader {
                              loaderType : DGActivityIndicatorAnimationType?=nil){
         
         if let rootVC = UIApplication.getTopViewController(){
+            self.hideAndRemoveFromSuperView()
             self.viewForActivity.isHidden = false
             self.activityIndicatorView.isHidden = false
             self.viewForActivity.backgroundColor = (backColor != nil) ? backColor : self.backColor
@@ -92,9 +93,10 @@ open class Loader {
                     self.TxtLbl.textColor = txtColor!
                 }
             }
-            
-            rootVC.view.addSubview(self.viewForActivity)
-            rootVC.view.bringSubviewToFront(self.viewForActivity)
+            DispatchQueue.main.async {
+                rootVC.view.addSubview(self.viewForActivity)
+                rootVC.view.bringSubviewToFront(self.viewForActivity)
+            }
         }
         
     }
@@ -104,12 +106,14 @@ open class Loader {
                            txtToShow: String?=nil,
                            txtColor: UIColor?=nil,
                            loaderType : DGActivityIndicatorAnimationType?=nil){
-        setUpLoader(backColor: backColor,
-                    loaderColor: loaderColor,
-                    txtToShow: txtToShow,
-                    txtColor: txtColor,
-                    loaderType: loaderType)
-        activityIndicatorView.startAnimating()
+        DispatchQueue.main.async {
+            self.setUpLoader(backColor: backColor,
+                        loaderColor: loaderColor,
+                        txtToShow: txtToShow,
+                        txtColor: txtColor,
+                        loaderType: loaderType)
+            self.activityIndicatorView.startAnimating()
+        }
     }
     
     func setUIComponents(){
@@ -123,43 +127,52 @@ open class Loader {
     }
     
     public func hideLoader(){
-        if activityIndicatorView != nil{
-            activityIndicatorView.stopAnimating()
-            self.timer.invalidate()
-            if let rootVC = UIApplication.getTopViewController(){
-                if(rootVC.view.subviews.contains(self.viewForActivity)){
-                    UIView.animate(withDuration: 1.0, animations: {
-                        self.viewForActivity.alpha = 0.0
-                        self.activityIndicatorView.alpha = 0.0
-                        self.TxtLbl.alpha = 0.0
-                    }, completion: { (status) in
-                        if status {
-                            self.activityIndicatorView.isHidden = true
-                            self.viewForActivity.isHidden = true
-                            self.TxtLbl.isHidden = true
-                            self.TxtLbl.removeFromSuperview()
-                            self.activityIndicatorView.removeFromSuperview()
-                            self.viewForActivity.removeFromSuperview()
-                        }
-                    })
+        DispatchQueue.main.async {
+            if self.activityIndicatorView != nil{
+                self.activityIndicatorView.stopAnimating()
+                self.timer.invalidate()
+                if let rootVC = UIApplication.getTopViewController(){
+                    if(rootVC.view.subviews.contains(self.viewForActivity)){
+                        UIView.animate(withDuration: 0.2, animations: {
+                            self.viewForActivity.alpha = 0.0
+                            self.activityIndicatorView.alpha = 0.0
+                            self.TxtLbl.alpha = 0.0
+                        }, completion: { (status) in
+                            if status {
+                                self.hideAndRemoveFromSuperView()
+                            }
+                        })
+                    }
                 }
             }
         }
     }
     
+    func hideAndRemoveFromSuperView(){
+        self.timer.invalidate()
+        self.activityIndicatorView.isHidden = true
+        self.viewForActivity.isHidden = true
+        self.TxtLbl.isHidden = true
+        self.TxtLbl.removeFromSuperview()
+        self.activityIndicatorView.removeFromSuperview()
+        self.viewForActivity.removeFromSuperview()
+    }
+    
     @objc func timeUpdate(){
-        if !self.TxtLbl.isHidden && self.TxtLbl.text != nil{
-            if self.TxtLbl.text!.contains("..."){
-                self.TxtLbl.text = self.TxtLbl.text!.components(separatedBy: "...").first!
-            }else if self.TxtLbl.text!.contains(".."){
-                self.TxtLbl.text = self.TxtLbl.text! + "."
-            }else if self.TxtLbl.text!.contains("."){
-                self.TxtLbl.text = self.TxtLbl.text! + "."
+        DispatchQueue.main.async {
+            if !self.TxtLbl.isHidden && self.TxtLbl.text != nil{
+                if self.TxtLbl.text!.contains("..."){
+                    self.TxtLbl.text = self.TxtLbl.text!.components(separatedBy: "...").first!
+                }else if self.TxtLbl.text!.contains(".."){
+                    self.TxtLbl.text = self.TxtLbl.text! + "."
+                }else if self.TxtLbl.text!.contains("."){
+                    self.TxtLbl.text = self.TxtLbl.text! + "."
+                }else{
+                    self.TxtLbl.text = self.TxtLbl.text! + "."
+                }
             }else{
-                self.TxtLbl.text = self.TxtLbl.text! + "."
+                self.timer.invalidate()
             }
-        }else{
-            self.timer.invalidate()
         }
     }
 }

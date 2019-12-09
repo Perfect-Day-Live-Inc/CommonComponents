@@ -24,7 +24,6 @@
 		777BABB22322EC1B004DBF77 /* back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 777BABA22322EC1B004DBF77 /* back@3x.png */; };
 		777BABB32322EC1B004DBF77 /* Cross@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 777BABA32322EC1B004DBF77 /* Cross@2x.png */; };
 		778911C7227A183E00551FB4 /* CommonComponentsAndLibraries.h in Headers */ = {isa = PBXBuildFile; fileRef = 778911C5227A183E00551FB4 /* CommonComponentsAndLibraries.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7790736922842AAC00104C07 /* NullDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7790736822842AAC00104C07 /* NullDataView.swift */; };
 		779073CE22845CAF00104C07 /* TatsiConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779073AD22845CAE00104C07 /* TatsiConfig.swift */; };
 		779073CF22845CAF00104C07 /* CGSizeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779073AF22845CAE00104C07 /* CGSizeExtensions.swift */; };
 		779073D022845CAF00104C07 /* PHAssetCollectionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779073B022845CAE00104C07 /* PHAssetCollectionExtensions.swift */; };
@@ -65,6 +64,7 @@
 		77E56814231D7D410081C1BC /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E5680D231D7D410081C1BC /* CameraController.swift */; };
 		77E56815231D7D410081C1BC /* PreviewImageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77E5680E231D7D410081C1BC /* PreviewImageVC.xib */; };
 		77E5681B231D7FE20081C1BC /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E5681A231D7FE20081C1BC /* ImagePicker.swift */; };
+		77F752B1239E95C600468128 /* NullDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F752B0239E95C600468128 /* NullDataView.swift */; };
 		77FA15DA22DDFD1600B0D54A /* AlertSheetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77FA15D522DDFD1600B0D54A /* AlertSheetCell.xib */; };
 		77FA15DB22DDFD1600B0D54A /* AlertSheetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FA15D622DDFD1600B0D54A /* AlertSheetCell.swift */; };
 		77FA15DC22DDFD1600B0D54A /* AlertSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FA15D722DDFD1600B0D54A /* AlertSheet.swift */; };
@@ -170,7 +170,6 @@
 		778911C2227A183E00551FB4 /* CommonComponentsAndLibraries.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CommonComponentsAndLibraries.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		778911C5227A183E00551FB4 /* CommonComponentsAndLibraries.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonComponentsAndLibraries.h; sourceTree = "<group>"; };
 		778911C6227A183E00551FB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7790736822842AAC00104C07 /* NullDataView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NullDataView.swift; sourceTree = "<group>"; };
 		779073AD22845CAE00104C07 /* TatsiConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TatsiConfig.swift; sourceTree = "<group>"; };
 		779073AF22845CAE00104C07 /* CGSizeExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGSizeExtensions.swift; sourceTree = "<group>"; };
 		779073B022845CAE00104C07 /* PHAssetCollectionExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PHAssetCollectionExtensions.swift; sourceTree = "<group>"; };
@@ -211,6 +210,7 @@
 		77E5680D231D7D410081C1BC /* CameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 		77E5680E231D7D410081C1BC /* PreviewImageVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreviewImageVC.xib; sourceTree = "<group>"; };
 		77E5681A231D7FE20081C1BC /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		77F752B0239E95C600468128 /* NullDataView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NullDataView.swift; sourceTree = "<group>"; };
 		77FA15D522DDFD1600B0D54A /* AlertSheetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlertSheetCell.xib; sourceTree = "<group>"; };
 		77FA15D622DDFD1600B0D54A /* AlertSheetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertSheetCell.swift; sourceTree = "<group>"; };
 		77FA15D722DDFD1600B0D54A /* AlertSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertSheet.swift; sourceTree = "<group>"; };
@@ -390,7 +390,7 @@
 		7790736722842A9B00104C07 /* NullDataView */ = {
 			isa = PBXGroup;
 			children = (
-				7790736822842AAC00104C07 /* NullDataView.swift */,
+				77F752B0239E95C600468128 /* NullDataView.swift */,
 			);
 			path = NullDataView;
 			sourceTree = "<group>";
@@ -868,7 +868,6 @@
 				779073DE22845CAF00104C07 /* ChangeAlbumArrowView.swift in Sources */,
 				779073D722845CAF00104C07 /* AlbumTableViewCell.swift in Sources */,
 				779073D022845CAF00104C07 /* PHAssetCollectionExtensions.swift in Sources */,
-				7790736922842AAC00104C07 /* NullDataView.swift in Sources */,
 				77FA6B992280528600522DAE /* DGActivityIndicatorTripleRingsAnimation.m in Sources */,
 				77FA6BA32280528600522DAE /* DGActivityIndicatorTriplePulseAnimation.m in Sources */,
 				77FD8560227C413C006BB623 /* AlertViewController.swift in Sources */,
@@ -904,6 +903,7 @@
 				77FA6BD32280528600522DAE /* DGActivityIndicatorRotatingTrigonAnimation.m in Sources */,
 				77FA6BCD2280528600522DAE /* DGActivityIndicatorBallSpinFadeLoader.m in Sources */,
 				779073DC22845CAF00104C07 /* CameraIconView.swift in Sources */,
+				77F752B1239E95C600468128 /* NullDataView.swift in Sources */,
 				77FA6BAB2280528600522DAE /* DGActivityIndicatorBallScaleMultipleAnimation.m in Sources */,
 				77D5FEE6228311C800586F18 /* ImageManager.swift in Sources */,
 				77D5FEEE228311C800586F18 /* ImageViewer.swift in Sources */,

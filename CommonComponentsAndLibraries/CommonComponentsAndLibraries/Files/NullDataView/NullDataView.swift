@@ -21,13 +21,7 @@ import UIKit
 //------------------------------------------------------------------------------------------------------//
 
 open class NullDataView{
-    private init() {}
-    
-    private static let instance = NullDataView()
-    
-    static public func getInstance() -> NullDataView{
-        return instance
-    }
+    public init() {}
     
     var nullImage : UIImageView = UIImageView()
     var alertLbl : UILabel = UILabel()
