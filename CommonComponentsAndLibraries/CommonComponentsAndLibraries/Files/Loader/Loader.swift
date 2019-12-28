@@ -143,6 +143,8 @@ open class Loader {
                             }
                         })
                     }
+                }else{
+                    self.hideAndRemoveFromSuperView()
                 }
             }
         }
@@ -150,12 +152,14 @@ open class Loader {
     
     func hideAndRemoveFromSuperView(){
         self.timer.invalidate()
-        self.activityIndicatorView.isHidden = true
-        self.viewForActivity.isHidden = true
-        self.TxtLbl.isHidden = true
-        self.TxtLbl.removeFromSuperview()
-        self.activityIndicatorView.removeFromSuperview()
-        self.viewForActivity.removeFromSuperview()
+        DispatchQueue.main.async {
+            self.activityIndicatorView.isHidden = true
+            self.viewForActivity.isHidden = true
+            self.TxtLbl.isHidden = true
+            self.TxtLbl.removeFromSuperview()
+            self.activityIndicatorView.removeFromSuperview()
+            self.viewForActivity.removeFromSuperview()
+        }
     }
     
     @objc func timeUpdate(){
