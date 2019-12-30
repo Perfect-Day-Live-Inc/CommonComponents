@@ -47,7 +47,10 @@ open class Loader {
                              txtColor: UIColor?=nil,
                              loaderType : DGActivityIndicatorAnimationType?=nil){
         
-        if let rootVC = UIApplication.getTopViewController(){
+        if var rootVC = UIApplication.getTopViewController(){
+            if rootVC.isKind(of: UINavigationController.self){
+                rootVC = (rootVC as! UINavigationController).topViewController!
+            }
             self.hideAndRemoveFromSuperView()
             self.viewForActivity.isHidden = false
             self.activityIndicatorView.isHidden = false
@@ -142,6 +145,8 @@ open class Loader {
                                 self.hideAndRemoveFromSuperView()
                             }
                         })
+                    }else{
+                        self.hideAndRemoveFromSuperView()
                     }
                 }else{
                     self.hideAndRemoveFromSuperView()
