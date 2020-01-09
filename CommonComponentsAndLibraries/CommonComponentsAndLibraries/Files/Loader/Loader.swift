@@ -51,7 +51,6 @@ open class Loader {
             if rootVC.isKind(of: UINavigationController.self){
                 rootVC = (rootVC as! UINavigationController).topViewController!
             }
-            self.hideAndRemoveFromSuperView()
             self.viewForActivity.isHidden = false
             self.activityIndicatorView.isHidden = false
             self.viewForActivity.backgroundColor = (backColor != nil) ? backColor : self.backColor
@@ -71,7 +70,7 @@ open class Loader {
                 self.activityIndicatorView.type = loaderType!
             }
             
-            UIView.animate(withDuration: 1.0) {
+            UIView.animate(withDuration: 0.2) {
                 self.viewForActivity.alpha = 1.0
                 self.activityIndicatorView.alpha = 1.0
                 if txtToShow != nil{
