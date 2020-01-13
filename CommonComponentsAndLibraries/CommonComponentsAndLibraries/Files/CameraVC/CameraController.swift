@@ -296,7 +296,7 @@ class CameraController: UIViewController {
     func startRecording() {
         
         if movieOutput.isRecording == false {
-            var connection = movieOutput.connection(with: .video)
+            let connection = movieOutput.connection(with: .video)
             if (connection?.isVideoOrientationSupported)! {
                 connection?.videoOrientation = currentVideoOrientation()
             }
@@ -450,7 +450,7 @@ extension CameraController: AVCaptureFileOutputRecordingDelegate {
     func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
         
         if (error != nil) {
-            if let nsError = error as? NSError{
+            if let nsError = error as NSError?{
                 if nsError.localizedFailureReason == "The recording reached the maximum allowable length."{
                     self.showAlert(title: "Alert", message: "The recording reached the maximum allowable length.")
                 }
@@ -464,7 +464,14 @@ extension CameraController: AVCaptureFileOutputRecordingDelegate {
                 editController.videoPath = urlToSend.last!
                 editController.videoMaximumDuration = TimeInterval(self.maximumDurationInSeconds)
                 editController.delegate = self
-                self.present(editController, animated:true)
+                editController.popoverPresentationController?.sourceView = self.view
+                editController.popoverPresentationController?.sourceRect = CGRect.init(x: self.view.center.x,
+                                                                                       y: self.view.center.y,
+                                                                                       width: 0,
+                                                                                       height: 0)
+                DispatchQueue.main.async {
+                    self.present(editController, animated:true)
+                }
             }
         }
         
@@ -482,6 +489,7 @@ extension CameraController: AVCapturePhotoCaptureDelegate{
             let vc = PreviewImageVC.init(nibName: "PreviewImageVC", bundle: bundle)
             vc.delegate = self
             vc.imageData = data
+            vc.popoverPresentationController?.sourceView = self.view
             DispatchQueue.main.async {
                 self.present(vc, animated: true, completion: nil)
             }

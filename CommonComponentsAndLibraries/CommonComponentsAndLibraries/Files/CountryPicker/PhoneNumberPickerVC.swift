@@ -42,9 +42,14 @@ public protocol PhoneNumberPickerVCDelegate {
     func phoneNumberPicker(number: String, isoModel: IsoCountryInfo)
 }
 
+public enum PhoneNumberRequirement{
+    case mandatory
+    case optional
+}
+
 open class PhoneNumberPickerVC: UIViewController {
     
-    
+    public var requirement: PhoneNumberRequirement = .mandatory
     public init(){
         let bundle = Bundle.init(for: PhoneNumberPickerVC.self)
         print("All Bundles ", Bundle.allBundles)
@@ -255,10 +260,12 @@ open class PhoneNumberPickerVC: UIViewController {
                                  backgroundImage: UIImage? = nil,
                                  isTransparentNavigation: Bool? = nil,
                                  navigationBarItemColor: UIColor? = nil,
-                                 textColors: UIColor? = nil){
+                                 textColors: UIColor? = nil,
+                                 requirement: PhoneNumberRequirement=PhoneNumberRequirement.mandatory){
         
         self.maximumExcludingDailingCode = maximumExcludingDailingCode
         self.minmumDigitsRequired = minmumDigitsRequired
+        self.requirement = requirement
         
         if countryModel != nil{
             self.countryModel = countryModel!
@@ -363,6 +370,12 @@ extension PhoneNumberPickerVC : UITableViewDelegate, UITableViewDataSource{
     
     ///this will check if number is not empty then call delegate method
     @objc func doneBtnTapped(){
+        if self.requirement == .optional{
+            if numberField.text == ""{
+                self.backButtonTapped()
+                return
+            }
+        }
         if numberField.text != "", numberField.text!.count >= self.minmumDigitsRequired, numberField.text!.count <= self.maximumExcludingDailingCode{
             if self.isValidPhoneNumber(number: self.codeLbl.text! + "" + self.numberField.text!){
                 if delegate != nil{
@@ -373,12 +386,7 @@ extension PhoneNumberPickerVC : UITableViewDelegate, UITableViewDataSource{
                         delegate!.phoneNumberPicker(number: self.numberField.text!,
                                                     isoModel: self.countryModel!)
                     }
-                    
-                    if self.isPresented{
-                        self.dismiss(animated: true, completion: nil)
-                    }else{
-                        self.navigationController?.popViewController(animated: true)
-                    }
+                    self.backButtonTapped()
                 }
             }else{
                 self.showAlert(withMsg: "Please enter valid number.")
