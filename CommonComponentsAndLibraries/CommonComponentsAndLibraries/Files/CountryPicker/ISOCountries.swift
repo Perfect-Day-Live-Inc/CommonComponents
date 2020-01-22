@@ -37,7 +37,7 @@ public struct IsoCountryInfo {
 
 open class ISOCountries {
     
-    class var allCountries:Array<IsoCountryInfo> {
+    open class var allCountries:Array<IsoCountryInfo> {
         
         get {
             return [
