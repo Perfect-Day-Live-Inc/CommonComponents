@@ -49,7 +49,11 @@ open class Loader {
         
         if var rootVC = UIApplication.getTopViewController(){
             if rootVC.isKind(of: UINavigationController.self){
-                rootVC = (rootVC as! UINavigationController).topViewController!
+                if let scrollView = (rootVC as! UINavigationController).topViewController?.isKind(of: UITableViewController.self){
+                    rootVC = (rootVC as! UINavigationController)
+                }else{
+                    rootVC = (rootVC as! UINavigationController).topViewController!
+                }
             }
             self.viewForActivity.isHidden = false
             self.activityIndicatorView.isHidden = false
