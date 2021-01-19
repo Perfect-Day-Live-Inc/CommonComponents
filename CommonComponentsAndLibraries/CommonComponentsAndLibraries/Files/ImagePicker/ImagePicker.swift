@@ -106,6 +106,7 @@ open class ImagePicker : NSObject{
     public var fontForPicker = UIFont.systemFont(ofSize: 18)
     public var tintColor = UIColor.black
     public var allowEditing : Bool = false
+    public var microPhoneAndCameraPermsissionMsg : String = "Please grant microphone & camera permission to continue."
     
     private var pickerType : UIImagePickerController.SourceType = .camera
     private var sourceVC : UIViewController!
@@ -166,6 +167,20 @@ open class ImagePicker : NSObject{
             self.presentCameraSettings()
             return
         }
+        
+        if AVAudioSession.sharedInstance().recordPermission == .denied {
+            
+            self.presentAudioSettings()
+            return
+        }else if AVAudioSession.sharedInstance().recordPermission == .undetermined{
+            AVAudioSession.sharedInstance().requestRecordPermission { (granted) in
+                if !granted{
+                    self.presentAudioSettings()
+                    return
+                }
+            }
+        }
+        
         if UIImagePickerController.isSourceTypeAvailable(.camera) && pickerType == .camera{
             picker.sourceType = .camera
         }else if pickerType != .camera{
@@ -176,6 +191,7 @@ open class ImagePicker : NSObject{
             let vc = CameraController.init(nibName: "CameraController", bundle: bundle)
             vc.captureMode = .picture
             vc.delegate = self
+            vc.modalPresentationStyle = .fullScreen
             DispatchQueue.main.async {
                 self.sourceVC.present(vc, animated: true, completion: nil)
             }
@@ -191,6 +207,21 @@ open class ImagePicker : NSObject{
         
     }
     
+    private func checkAudioPermission(){
+        if AVAudioSession.sharedInstance().recordPermission == .denied {
+            
+            self.presentAudioSettings()
+            return
+        }else if AVAudioSession.sharedInstance().recordPermission == .undetermined{
+            AVAudioSession.sharedInstance().requestRecordPermission { (granted) in
+                if !granted{
+                    self.presentAudioSettings()
+                    return
+                }
+            }
+        }
+    }
+    
     private func showVideoController(maximumDurationInSeconds: TimeInterval=30.0,
                                      fromVC : UIViewController,
                                      delegateFromVC : ImagePickerDelegate){
@@ -201,6 +232,20 @@ open class ImagePicker : NSObject{
             self.presentCameraSettings()
             return
         }
+
+        if AVAudioSession.sharedInstance().recordPermission == .denied {
+            
+            self.presentAudioSettings()
+            return
+        }else if AVAudioSession.sharedInstance().recordPermission == .undetermined{
+            AVAudioSession.sharedInstance().requestRecordPermission { (granted) in
+                if !granted{
+                    self.presentAudioSettings()
+                    return
+                }
+            }
+        }
+        
         self.sourceVC = fromVC
         if UIImagePickerController.isSourceTypeAvailable(.camera){
             picker.sourceType = .camera
@@ -212,6 +257,7 @@ open class ImagePicker : NSObject{
             vc.captureMode = .video
             vc.delegate = self
             vc.maximumDurationInSeconds = Int(maximumDurationInSeconds)
+            vc.modalPresentationStyle = .fullScreen
             DispatchQueue.main.async {
                 self.sourceVC.present(vc, animated: true, completion: nil)
             }
@@ -256,7 +302,8 @@ open class ImagePicker : NSObject{
         picker.navigationBar.tintColor = self.tintColor
         picker.navigationBar.barTintColor = UIColor.white
         picker.navigationBar.isHidden = false
-        
+
+        picker.modalPresentationStyle = .fullScreen
         picker.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : self.tintColor,
                                                     NSAttributedString.Key.font : self.fontForPicker]
         
@@ -269,9 +316,18 @@ open class ImagePicker : NSObject{
         }
     }
     
+    private func presentAudioSettings(){
+        self.presentAlertForSettings(title: "Alert", message: self.microPhoneAndCameraPermsissionMsg)
+    }
+    
     private func presentCameraSettings() {
-        let alertController = UIAlertController(title: "Error",
-                                                message: "Camera access is denied",
+        self.presentAlertForSettings(title: "Alert", message: self.microPhoneAndCameraPermsissionMsg)
+    }
+    
+    private func presentAlertForSettings(title: String,
+                                         message: String){
+        let alertController = UIAlertController(title: title,
+                                                message: message,
                                                 preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Cancel", style: .default))
         alertController.addAction(UIAlertAction(title: "Settings", style: .cancel) { _ in
