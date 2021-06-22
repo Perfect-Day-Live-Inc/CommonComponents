@@ -52,9 +52,11 @@ final public class TatsiPickerViewController: UINavigationController {
                 self.showAlbumViewController(with: album)
             }
             
-        case .denied, .notDetermined, .restricted:
+        default:
             // Not authorized, show the view to give access
             self.viewControllers = [AuthorizationViewController()]
+//        case .limited:
+//            self.viewControllers = [AuthorizationViewController()]
         }
     }
     
