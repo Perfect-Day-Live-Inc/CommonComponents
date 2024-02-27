@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "CommonComponents"
-  s.version      = "5.0.0"
+  s.version      = "6.0.1"
   s.summary      = "A short description of CommonComponentsAndLibraries. and i will use these file for my new projects."
 
   # This description is used to generate tags and improve search results.
@@ -78,7 +78,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://gitlab.com/ahmedcs1/common-components-and-libraries.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/Perfect-Day-Live-Inc/CommonComponents.git", :tag => "#{s.version}" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #

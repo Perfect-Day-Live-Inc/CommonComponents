@@ -51,7 +51,7 @@ class MediaDownloader{
                 
                 if let mimeType = response?.mimeType{
                     if mimeType.contains("image"){
-                        if (response as? HTTPURLResponse) != nil {
+                        if response != nil {
                             
                             //checking if the response contains an image
                             if let imageData = data {
